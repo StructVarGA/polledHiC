@@ -32,13 +32,15 @@
 
 ```bash
 datadir=/work2/project/seqoccin/data/reads/hic/bos_taurus
-for file in `ls $datadir/*R1.fastq.gz`; 
-do
-  base=`basename $file`
-  name=`echo $base | awk '{ split($1,a,"_"); print a[1]}'`
-  numlines=`zcat $file  | wc -l | awk '{ print $1/4*2}'`
-  printf "%s | %s\n" $name $numlines | sed 's/\./ | /g'
-done > stats.txt
+printf "| trio | animal | run | protocol | reads |\n" > tmp_stats.txt
+printf "| ------------- | ------------- |  ------------- | ------------- | ------------- |\n" >> tmp_stats.txt
+for file in `ls $datadir/*R1.fastq.gz`;  
+ do   
+   base=`basename $file`;   
+   name=`echo $base | awk '{ split($1,a,"_"); print a[1]}'`;   
+   numlines=`zcat $file  | wc -l | awk '{ print $1/4*2}'`;   
+   printf "| %s | %s |\n" $name $numlines | sed 's/\./ | /g'; 
+ done >> tmp_stats.txt
 ```
 
 
