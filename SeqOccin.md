@@ -1,7 +1,7 @@
 
 #### Available HiC data in SeqOccin
 
-| trio | animal | run | protocol | run | reads |
+| trio | animal | run | protocol | reads |
 | ------------- | ------------- |  ------------- | 
 | trio1 | father | run1 | Arima | 179275634 |
 | trio1 | father | run1 | Dovetail | 7400016 |
