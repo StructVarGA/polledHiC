@@ -1,4 +1,15 @@
 
+### SeqOccin HiC data 
+
+- Two bovine trios 
+    - different HiC protocols (Arima, Dovetail, PhaseG and home-made)
+    - different runs with different coverage
+ 
+ Location on genologin (front server of the genotoul plateform): 
+ ```
+ /work2/project/seqoccin/data/reads/hic/bos_taurus
+ ```
+
 #### Available HiC data in SeqOccin
 
 | trio | animal | run | protocol | reads |
