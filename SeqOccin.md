@@ -28,7 +28,6 @@
 | trio2 | offspring | run1 | Maison | 282425964 |
 | trio2 | offspring | run2 | Maison | 215786704 |
 
-
 #### Script to generate HiC data stats
 
 ```bash
