@@ -5,3 +5,5 @@ Hi-C analysis: from data generation to integration
 Boost-HiC: computational enhancement of long-range
 contacts in chromosomal contact maps  
 https://hal.archives-ouvertes.fr/hal-02349503/document
+
+https://github.com/Zhong-Lab-UCSD/HiCtool
