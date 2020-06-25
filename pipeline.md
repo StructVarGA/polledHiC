@@ -2,11 +2,12 @@
 
 ### NF-CORE HIC PIPELINE ON SeqOccin'S DATA
 
+Setting env variables (see bottom for an exemple)
 ```
-dir=         # The working dir
-reads=$dir/data/reads
-runid=nfcorehic      # simply a name describing
-genome=              # location of the genome file
+wdir=         # The working dir
+reads=        # directory with reads
+runid=nfcorehic      # simply a name describing the sample
+genome=              # location of the genome file (warning, bowtie index shoul have the same prefix, see below for an example)
 chromsize=           # a tab separated file with chromosome length : chrid   length, one line per chromosome
 outdir=$dir/results/$runid
 script=$outdir.sh
@@ -69,14 +70,17 @@ nextflow run nf-core/hic \
  --skipCool' > $script
 ```
 
-An finally launching the script
+And finally launching the script
 
 ```
 sbatch $script
 ```
 
+Concifguration example
+
 ```
-dir=/work2/genphyse/dynagen/tfaraut/polledHiC/work/trio1.offspring.Maison.run1
+wdir=/work2/genphyse/dynagen/tfaraut/polledHiC/work/test
+readsdir=/work2/genphyse/dynagen/tfaraut/polledHiC/data/reads/test
 reads=$dir/data/reads
 runid=nfcorehic
 outdir=$dir/results/$runid
