@@ -50,7 +50,7 @@ nextflow run nf-core/hic \
  --outdir     '$outdir' \
  --work-dir   '$outdir' \
  -resume \
- --reads      '"'"''$reads'/*_R{1,2}.fastq.gz'"'"' \
+ --reads      '"'"''$readsdir'/*_R{1,2}.fastq.gz'"'"' \
  --bwt2_opts_end2end '"'"'--very-sensitive -L 30 --score-min L,-0.6,-0.2 --end-to-end --reorder'"'"' \
  --bwt2_opts_trimmed '"'"'--very-sensitive -L 20 --score-min L,-0.6,-0.2 --end-to-end --reorder'"'"' \
  --min_mapq 10 \
