@@ -4,11 +4,12 @@
 ```
 ├── polledHiC
 │   ├── data
-|   |    ├── trio1.mother.protocolA
-|   |    ├── trio1.mother.protocolB
-|   |    ├── trio1.offspring.protocolA
-|   |    └── ...
-│   └── genome
+|   |    ├── reads
+|   |    |    ├── trio1.mother.protocolA
+|   |    |    ├── trio1.mother.protocolB
+|   |    |    ├── trio1.offspring.protocolA
+|   |    |    └── ...
+|   |    └── genome
 ```
   - data subdir  
   The data dir contains for each (trio,indiv,hic_protocol) symbolic links to Hic fastq files of the seqoccin hic repository datadir :
