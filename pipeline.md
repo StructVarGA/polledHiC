@@ -76,7 +76,7 @@ And finally launching the script
 sbatch $script
 ```
 
-Concifguration example
+Configuration example
 
 ```
 wdir=/work2/genphyse/dynagen/tfaraut/polledHiC/work/test
