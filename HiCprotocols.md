@@ -21,18 +21,18 @@ restriction_site  ^GATC, G^ANTC
 ligation_site     GATCGATC, GANTGATC, GANTANTC, GATCANTC
 ```
 
-###  Maison (plus or minus)
-
-```
-restriction_site  A^AGCTT
-ligation_site     AAGCTAGCTT
-```
-
 ### Dovetail
 
 ```
 restriction_site  ^GATC
 ligation_site    GATCGATC
+```
+
+###  Maison (plus or minus)
+
+```
+restriction_site  A^AGCTT
+ligation_site     AAGCTAGCTT
 ```
 
 
@@ -43,10 +43,6 @@ ligation_site    GATCGATC
 ### Restriction and ligation site : example of a protocol with hindIII figure 1b in 
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4706059/
-
-The restriction motif and ligation mtif differs between protocols :
-
-
 
 
 
