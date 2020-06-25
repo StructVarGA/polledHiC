@@ -3,15 +3,20 @@
 ### NF-CORE HIC PIPELINE ON SeqOccin'S DATA
 
 ```
-dir=/work2/genphyse/dynagen/tfaraut/polledHiC/work/trio1.offspring.Maison.run1
+dir=         # The working dir
 reads=$dir/data/reads
-runid=nfcorehic
+runid=nfcorehic      # simply a name describing
+genome=              # location of the genome file
+chromsize=           # a tab separated file with chromosome length : chrid   length, one line per chromosome
 outdir=$dir/results/$runid
-genome=/bank/bowtie2db/ensembl_bos_taurus_genome
-chromsize=$dir/data/genome/chrom.len
 script=$outdir.sh
 log=$outdir.log
 err=$outdir.err
+```
+
+Preparing the outdir
+```
+mkdir $outdir
 ```
 
 Now constructing the script
@@ -69,3 +74,17 @@ An finally launching the script
 ```
 sbatch $script
 ```
+
+```
+dir=/work2/genphyse/dynagen/tfaraut/polledHiC/work/trio1.offspring.Maison.run1
+reads=$dir/data/reads
+runid=nfcorehic
+outdir=$dir/results/$runid
+genome=/bank/bowtie2db/ensembl_bos_taurus_genome
+chromsize=$dir/data/genome/chrom.len
+script=$outdir.sh
+log=$outdir.log
+err=$outdir.err
+```
+
+
