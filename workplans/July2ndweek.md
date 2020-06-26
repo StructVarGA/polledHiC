@@ -47,14 +47,3 @@ This can be done programmaticaly.
 
 Now everything is ready to try the [HiC pipeline](pipeline.md) 
 
-First test on a small data set. Make a subdirectory in the data/reads dir
-```
-mkdir data/reads/test
-```
-For example reads from the trio1.offspring.run1.Maison
-Again, make symbolic links to the fastq files
-```
-trio1.offspring.run1.Maison-plus_GACGTC-CDFVM_L001_R1.fastq.gz -> /home/faraut/seqoccin/data/reads/hic/bos_taurus/trio1.offspring.run1.Maison-plus_GACGTC-CDFVM_L001_R1.fastq.gz
-trio1.offspring.run1.Maison-plus_GACGTC-CDFVM_L001_R2.fastq.gz -> /home/faraut/seqoccin/data/reads/hic/bos_taurus/trio1.offspring.run1.Maison-plus_GACGTC-CDFVM_L001_R2.fastq.gz
-```
-
