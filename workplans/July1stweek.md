@@ -15,7 +15,7 @@ First steps with the HiC pipeline ([HiC pipeline](../pipeline.md))
 6. You are now ready to launch the HiC pipeline on this small dataset
 7. Have a look at the different output files  
 
-I all this is done, you can also produce the first HiC map  
+**Bonus** I all this is done, you can also produce the first HiC map  
 4. Install HiCExplorer using conda: https://hicexplorer.readthedocs.io/en/latest/content/installation.html  
 5. Reformat the matrix format in h5 (https://hicexplorer.readthedocs.io/en/latest/content/tools/hicConvertFormat.html)  
 6. Construct the HiC contact map (using hicPlotMatrix)  
