@@ -7,8 +7,8 @@ Setting env variables (see bottom for an exemple)
 wdir=         # The working dir
 reads=        # directory with reads
 runid=nfcorehic      # simply a name describing the sample
-genome=              # location of the genome file (warning, bowtie index shoul have the same prefix, see below for an example)
-chromsize=           # a tab separated file with chromosome length : chrid   length, one line per chromosome
+genome=              # path of the genome file with associateds bowtie indexe (see bottom of the page for an example)
+chromsize=           # a tab separated file with chromosome length : chr_id   length, one line per chromosome
 outdir=$dir/results/$runid
 script=$outdir.sh
 log=$outdir.log
