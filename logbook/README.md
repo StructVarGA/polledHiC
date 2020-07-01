@@ -20,12 +20,15 @@
 Then run README.sh
 
 ## Copy results on local directory :
+
+```bash
 pref=/home/jmartin/work/polledHiC/work/test/nfcorehic
 cpdir="hic_results mapping MultiQC pipeline_info"
 for dir in $cpdir
 do
 	scp -r jmartin@genologin.toulouse.inra.fr:$pref/$dir .
 done
+```
 
 ## Create conda env to HiCExplorer :
 
