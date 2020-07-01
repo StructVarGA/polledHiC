@@ -1,12 +1,21 @@
-# Stage M1 - BBS - PolledHiC
+# Internship logbook
 
-[[_TOC_]]
+## Table of Contents
+* [2020-07-01](#2020-07-01)
+	* [Modification of wdir/datadir](#modify-wdirdatadir-)
+	* [Copy results on local directory](#copy-results-on-local-directory-)
+	* [Create conda env to HiCExplorer](#create-conda-env-to-hicexplorer-)
+	* [Convert HiCPro to h5 format](#convert-hicpro-to-h5-matrix-)
+	* [Construction of contact maps](#construction-of-contact-maps-)
+
 
 # 2020-07-01
 
 ## Modify wdir/datadir :
-wdir=/home/jmartin/work/polledHiC/work/test
-datadir=/home/jmartin/work/polledHiC/data
+
+`wdir=/home/jmartin/work/polledHiC/work/test`
+
+`datadir=/home/jmartin/work/polledHiC/data`
 
 Then run README.sh
 
@@ -44,9 +53,9 @@ conda activate hicexplorer
 
 !! **Not able to create conda env :** *Errno 28 NoSpaceLeftError: No space left on devices* !!
 
-After several try, it finished to create it correctly.
+**EDIT :** *After several try, it finished to create it correctly.*
 
-## Convert HiC to h5 matrix [GENOLOGIN]:
+## Convert HiCPro to h5 matrix :
 
 Copy to convertHiC.sh :
 ```bash
@@ -71,7 +80,7 @@ done
 
 **!! WARNING : You have to run this script in a dedicated session _(srun -c 8 --pty bash)_ !!**
 
-## Construction of contact map
+## Construction of contact maps :
 
 Copy in createMap.sh :
 
