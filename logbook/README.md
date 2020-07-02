@@ -10,6 +10,7 @@
 * [2020-07-02](#2020-07-02)
 	* [Move Conda Directory](#move-conda-directory-)
 	* [Link to the main data](#link-to-the-main-data-)
+		* [All-In-One script](#all-in-one-script-)
 	* [Meeting at 11:00 AM](#meeting-at-1100-am-)
 
 # 2020-07-01
@@ -183,9 +184,47 @@ do
 done
 ```
 
-Next step is to create symbolic link between data and new directory. 
-[SCRIPT IN COMMING]
+Next step was to create symbolic link between data and new directory. To realize this, I design a small script that I put on `~/work/polledHiC/data/` :
 
+```bash
+#!/bin/bash
+
+readsdir=/work2/project/seqoccin/data/reads/hic/bos_taurus
+datadir=/home/jmartin/work/polledHiC/data/reads
+
+for file in $(cat list_file.txt)
+do
+  subdir=$(echo ${file%%_*} | sed 's/.run*.//g')
+  ln -s $readsdir/$file $datadir/$subdir/$file
+done
+```
+
+### All-In-One script :
+
+Because it's more user-friendly, I purpose here a All-In-One script to automate all the previous step. I reached to group two step in one here : I control the creation of subdirectory at same time I create symbolic link. I named it as `exportData.sh` and it's on `~/work/polledHiC/data/.`
+
+```bash
+#!/bin/bash
+
+# Environment preparation
+readsdir=/work2/project/seqoccin/data/reads/hic/bos_taurus
+datadir=/home/jmartin/work/polledHiC/data/reads
+
+# List of read files
+list_file=$(ls $readsdir)
+
+# Creation of subdirectories and symoblic links
+for file in $list_file
+do
+  subdir=$(echo ${file%%_*} | sed 's/.run*.//g')
+  if [ -d $subdir ]; then
+  	ln -s $readsdir/$file $datadir/$subdir/$file
+  else
+  	mkdir -p $datadir/$subdir
+  	ln -s $readsdir/$file $datadir/$subdir/$file
+  fi
+done
+```
 
 ## Meeting at 11:00 AM :
 
