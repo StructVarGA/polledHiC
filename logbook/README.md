@@ -116,10 +116,10 @@ do
 	hicPlotMatrix --matrix $matrix --outFileName ${matrix%.matrix.h5}_log_map --log --title ${matrix%.matrix*}_log
 done
 ```
-	
+
 # 2020-07-02
 
-## Mova Conda Directory :
+## Move Conda Directory :
 
 I removed all the content of `~/.conda/` directory and I created a directory in the `save directory`.
 
