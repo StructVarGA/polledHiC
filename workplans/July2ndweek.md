@@ -31,7 +31,7 @@ destination=$TAREGET_ROOT_DIR    # WARNING Change this, for example use ~/work/p
 for file in `ls  $datadir/*fastq.gz`; 
   do 
      base=`basename $file`;   
-     name=`echo $base | awk '{ split($1,a,"_"); split(a[1],b,"."); print b[1]"."b[2]"."b[4]}'`;   
+     name=`echo $base | awk '{ split($1,a,"_"); print a[1]}' | sed 's/.run*.//g'`     
      echo $name 
      targetdir=$destination/$name
      mkdir -p $targetdir
