@@ -10,8 +10,9 @@
 * [2020-07-02](#2020-07-02)
 	* [Move Conda Directory](#move-conda-directory-)
 	* [Link to the main data](#link-to-the-main-data-)
-		* [All-In-One script](#all-in-one-script-)
 	* [Meeting at 11:00 AM](#meeting-at-1100-am-)
+	* [Download genome file](#download-genome-file-)
+	* [All-In-One script](#all-in-one-script-)
 
 # 2020-07-01
 
@@ -199,33 +200,6 @@ do
 done
 ```
 
-### All-In-One script :
-
-Because it's more user-friendly, I purpose here a All-In-One script to automate all the previous step. I reached to group two step in one here : I control the creation of subdirectory at same time I create symbolic link. I named it as `exportData.sh` and it's on `~/work/polledHiC/data/.`
-
-```bash
-#!/bin/bash
-
-# Environment preparation
-readsdir=/work2/project/seqoccin/data/reads/hic/bos_taurus
-datadir=/home/jmartin/work/polledHiC/data/reads
-
-# List of read files
-list_file=$(ls $readsdir)
-
-# Creation of subdirectories and symoblic links
-for file in $list_file
-do
-  subdir=$(echo ${file%%_*} | sed 's/.run*.//g')
-  if [ -d $subdir ]; then
-  	ln -s $readsdir/$file $datadir/$subdir/$file
-  else
-  	mkdir -p $datadir/$subdir
-  	ln -s $readsdir/$file $datadir/$subdir/$file
-  fi
-done
-```
-
 ## Meeting at 11:00 AM :
 
 Fix objectives to Monday :
@@ -234,3 +208,105 @@ Fix objectives to Monday :
 * Analyze the first output from test data.
 * Prepare a presentation of different output.
 * Prepare a presentation of different informations from MultiQC rapport.
+
+## Download genome file :
+
+Genome fasta file is downloaded thank's to `wget` :
+
+```bash
+# Set working directory
+cd ~/work/polledHiC/data/genome
+
+# Download with wget
+wget ftp://ftp.ensembl.org/pub/release-100/fasta/bos_taurus/dna/Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa.gz
+
+# Decompress (gzip archive aren't compatible with Samtools faidx)
+gzip -d Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa.gz
+```
+
+When all it's done, I had to index the genome file :
+```bash
+module load bioinfo/samtools-1.10
+samtools faidx Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa
+
+module load bioinfo/bowtie2-2.3.5.1
+bowtie2-build Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.bt
+```
+
+Everything is ready now to start the analyzes on Monday.
+
+## All-In-One script :
+
+Because it's more user-friendly, I purpose here a All-In-One script to automate all the previous step. I reached to group two step in one here : I control the creation of subdirectory at same time I create symbolic link. I named it as `exportData.sh` and it's on `~/work/polledHiC/data/.`
+
+```bash
+#!/bin/bash
+
+# Environment preparation
+echo "Environment Preparation"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+readsdir=/work2/project/seqoccin/data/reads/hic/bos_taurus
+datadir=/home/jmartin/work/polledHiC/data/reads
+genome=/home/jmartin/work/
+echo "Environment OK"
+
+# List of read files
+echo "Acquisition of reads files"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+list_file=$(ls $readsdir)
+
+# Creation of subdirectories and symbolic links
+echo "Creation of subdirectories and symbolic links"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+for file in $list_file
+do
+  subdir=$(echo ${file%%_*} | sed 's/.run*.//g')
+  if [ -d $datadir/$subdir ]; then
+  	ln -s $readsdir/$file $datadir/$subdir/$file
+  else
+  	mkdir -p $datadir/$subdir
+  	echo "Creation of $subdir"
+  	ln -s $readsdir/$file $datadir/$subdir/$file
+  fi
+done
+
+echo "Export reads data finished !"
+sleep 2
+
+# Export Genome data
+echo "Start exporting Genome data"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+
+cd genome/
+
+wget ftp://ftp.ensembl.org/pub/release-100/fasta/bos_taurus/dna/Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa.gz
+echo "Start decompress archive"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+gzip -d Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa.gz
+echo "Decompress SUCCESS"
+
+echo "Writting sbatch script"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+echo "#!/bin/bash
+#SBATCH -J "index_genome"
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -p workq
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=8G
+#SBATCH --export=ALL
+
+module purge
+module load bioinfo/samtools-1.10
+module load bioinfo/bowtie2-2.3.5.1
+
+samtools faidx Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa
+
+bowtie2-build Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.fa Bos_taurus.ARS-UCD1.2.dna_sm.toplevel.bt " > indexing_script.sh
+echo "SBATCH Script written \n"
+
+# Then
+echo "Submit sbatch query"
+echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
+sbatch indexing_script.sh
+```
