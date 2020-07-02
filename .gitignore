@@ -1,0 +1,5 @@
+## Ignore work/ directory
+work/*
+
+## Ignore data/ directory
+data/*
