@@ -17,6 +17,7 @@
 	* [Analyze of output files](#analyze-of-output-files-)
 		* [Contact map](#contact-map-)
 		* [MultiQC report](#multiqc-report-)
+	* [Preparation: Presentation Work](#preparation-presentation-work)
 
 # 2020-07-01
 
@@ -391,9 +392,7 @@ MultiQC report provides us lots of statistical informations. A great advantage f
 >
 > Failed to Align: 3.9%
 
-// TODO
-
-This part describes the alignment of reads in single-end mode.
+This part describes the alignment of reads in single-end mode. It can be seen that there are a very small amount of unaligned read, it seems that the mapping is a success.
 
 **Read Pairing :**
 
@@ -405,7 +404,7 @@ This part describes the alignment of reads in single-end mode.
 >
 > Singleton: 10.9%
 
-// TODO
+This part describes how the reads are paired of single-end mapping. It looks like about 10% of the reads aren't paired.
 
 **Read Pair Filtering :**
 
@@ -413,7 +412,7 @@ This part describes the alignment of reads in single-end mode.
 
 > Valid Pairs FF: 21.8%
 >
->Valid Pairs RR: 21.8%
+> Valid Pairs RR: 21.8%
 >
 > Valid Pairs RF: 21.5%
 >
@@ -429,7 +428,9 @@ This part describes the alignment of reads in single-end mode.
 > 
 > Dumped pairs: 0.0%
 
-// TODO
+This part describes how the reads pairs are 'organized'. It seems that the reads pairs without any preference either there are forward or reverse reads.
+
+It's possible to see that there are about 11% of filtered pairs *( = duplicate ? )* and same fragment pairs *( = singleton ? )*.
 
 **Contact Statistics :**
 
@@ -443,4 +444,8 @@ This part describes the alignment of reads in single-end mode.
 > 
 > Duplicate read pairs: 0.0%
 
-// TODO
+This part describes how contacts are 'organized' after duplicates removal. With this test dataset, the interractions are long-range cis- interractions (same chromosome but with more than 20Kbp of distance) or trans- interractions (regions are on differents chromosomes).
+
+## Preparation: Presentation Work
+
+As the firsts analyzes are done, and the environment ready to work with true data set, I focus my afternoon to prepare a presentation support of these analyze for Monday.
