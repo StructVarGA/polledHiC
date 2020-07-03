@@ -13,6 +13,10 @@
 	* [Meeting at 11:00 AM](#meeting-at-1100-am-)
 	* [Download genome file](#download-genome-file-)
 	* [All-In-One script](#all-in-one-script-)
+* [2020-07-03](#2020-07-03)
+	* [Analyze of output files](#analyze-of-output-files-)
+		* [Contact map](#contact-map-)
+		* [MultiQC report](#multiqc-report-)
 
 # 2020-07-01
 
@@ -310,3 +314,117 @@ echo "Submit sbatch query"
 echo -n "-" ; sleep 0.2 ; echo -n "-" ; sleep 0.2 ; echo "-"
 sbatch indexing_script.sh
 ```
+
+# 2020-07-03
+
+## Analyze of output files :
+
+On test dataset, pipeline return us lot of different results. I purpose to focus us on some of them :
+
+* Contact map (`[...]/nfcorehic/hic_results/matrix`) : contains several matrix of contact mapping at different resolutions.
+* MultiQC report give us many statistical informations, including :
+	* alignment statistics (`[...]/nfcorehic/mapping/stats/trio1.offspring.run1.Maison-plus_GACGTC-CDFVM_L001_bwt2pairs.pairstat`)
+	* pairing statistics (`[...]/nfcorehic/hic_results/stats/.../trio1.offspring.run1.Maison-plus_GACGTC-CDFVM_L001.mRSstat`)
+
+### Contact map :
+
+A contact map is defined by :
+
+* A list of genomic intervals related to the specified resolution (--in-size argument of nfcore pipeline) = BED FORMAT.
+* A matrix, stored as standard triplet sparse format = .tsv FORMAT.
+
+For instance, here is a presentation at the lowest resolutions :
+
+**Bed file :**
+
+| Chrom_ID       	| Start   	| End     	| Name 	|
+|----------------	|---------	|---------	|------	|
+| 1              	| 0       	| 1000000 	| 1    	|
+| 1              	| 1000000 	| 2000000 	| 2    	|
+| 1              	| 2000000 	| 3000000 	| 3    	|
+| ...            	| ...     	| ...     	| ...  	|
+| NKLS02002208.1 	| 8000000 	| 9000000 	| 4833 	|
+| NKLS02002208.1 	| 9000000 	| 9309904 	| 4834 	|
+| NKLS02002209.1 	| 0       	| 27572   	| 4835 	|
+
+**Matrix :**
+
+| Read1 	| Read2 	| Counts? 	|
+|-------	|-------	|--------	|
+| 1     	| 1     	| 40     	|
+| 1     	| 2     	| 12     	|
+| 1     	| 4     	| 4      	|
+| ...   	| ...   	| ...    	|
+| 4836  	| 4836  	| 80     	|
+| 4837  	| 4837  	| 3      	|
+
+To be used to create image map, this matrix need to be transformed in HDF5 format. This format is a complex compressed format structured as :
+```
+── matrix [HDF5 group]
+    ├── barcodes
+    ├── data
+    ├── indices
+    ├── indptr
+    ├── shape
+    └── features [HDF5 group]
+        ├─ _all_tag_keys
+        ├─ feature_type
+        ├─ genome
+        ├─ id
+        ├─ name
+        ├─ pattern [Feature Barcoding only]
+        ├─ read [Feature Barcoding only]
+        └─ sequence [Feature Barcoding only]
+```
+
+### MultiQC report :
+
+MultiQC report provides us lots of statistical informations. A great advantage from MultiQC is that return all of these as clearly graph.
+
+**Read Mapping :**
+
+![Mapping Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_mapping_stats_plot-1.png)
+
+> Full reads Alignments: 67.2%
+> Trimmed reads Alignments: 28.9%
+> Failed to Align: 3.9%
+
+// TODO
+This part describes the alignment of reads in single-end mode.
+
+**Read Pairing :**
+
+![Pairing Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_pairing_stats_plot-1.png)
+
+> Uniquely Aligned: 65.8%
+> Low Quality: 23.3%
+> Singleton: 10.9%
+
+// TODO
+
+**Read Pair Filtering :**
+
+![Filtering Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_filtering_plot-1.png)
+
+> Valid Pairs FF: 21.8%
+> Valid Pairs RR: 21.8%
+> Valid Pairs RF: 21.5%
+> Valid Pairs FR: 22.3%
+> Same Fragment - Same Circle: 0.3%
+> Same Fragment - Danglging Ends: 8.1%
+> Re-ligation: 0.8%
+> Filtered pairs: 3.5%
+> Dumped pairs: 0.0%
+
+// TODO
+
+**Contact Statistics :**
+
+![Contact Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_contact_plot-1.png)
+
+> Unique: cis <=20Kbp: 5.9%
+> Unique: cis > 20Kbp: 49.8%
+> Unique: trans: 44.2%
+> Duplicate read pairs: 0.0%
+
+// TODO
