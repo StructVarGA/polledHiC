@@ -383,48 +383,64 @@ MultiQC report provides us lots of statistical informations. A great advantage f
 
 **Read Mapping :**
 
-![Mapping Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_mapping_stats_plot-1.png)
+![Mapping Statistics](.fig/MultiQC_test/hicpro_mapping_stats_plot-1.png)
 
 > Full reads Alignments: 67.2%
+>
 > Trimmed reads Alignments: 28.9%
+>
 > Failed to Align: 3.9%
 
 // TODO
+
 This part describes the alignment of reads in single-end mode.
 
 **Read Pairing :**
 
-![Pairing Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_pairing_stats_plot-1.png)
+![Pairing Statistics](.fig/MultiQC_test/hicpro_pairing_stats_plot-1.png)
 
 > Uniquely Aligned: 65.8%
+>
 > Low Quality: 23.3%
+>
 > Singleton: 10.9%
 
 // TODO
 
 **Read Pair Filtering :**
 
-![Filtering Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_filtering_plot-1.png)
+![Filtering Statistics](.fig/MultiQC_test/hicpro_filtering_plot-1.png)
 
 > Valid Pairs FF: 21.8%
-> Valid Pairs RR: 21.8%
+>
+>Valid Pairs RR: 21.8%
+>
 > Valid Pairs RF: 21.5%
+>
 > Valid Pairs FR: 22.3%
+> 
 > Same Fragment - Same Circle: 0.3%
+> 
 > Same Fragment - Danglging Ends: 8.1%
+> 
 > Re-ligation: 0.8%
+> 
 > Filtered pairs: 3.5%
+> 
 > Dumped pairs: 0.0%
 
 // TODO
 
 **Contact Statistics :**
 
-![Contact Statistics](/home/jmartin/work/polledHiC/logbook/.fig/MultiQC_test/hicpro_contact_plot-1.png)
+![Contact Statistics](.fig/MultiQC_test/hicpro_contact_plot-1.png)
 
 > Unique: cis <=20Kbp: 5.9%
+> 
 > Unique: cis > 20Kbp: 49.8%
+> 
 > Unique: trans: 44.2%
+> 
 > Duplicate read pairs: 0.0%
 
 // TODO
