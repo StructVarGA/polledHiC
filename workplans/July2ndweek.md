@@ -25,6 +25,21 @@ trio2.offspring.run2.Maison_GACCTGAA-CTCACCAA-AHGCCLBBXY_L007_R2.fastq.gz -> /ho
 ```
 This can be done programmaticaly.
 
+```
+datadir=/work2/project/seqoccin/data/reads/hic/bos_taurus
+destination=$TAREGET_ROOT_DIR    # WARNING Change this, for example use ~/work/polledHiC/data/reads
+for file in `ls  $datadir/*fastq.gz`; 
+  do 
+     base=`basename $file`;   
+     name=`echo $base | awk '{ split($1,a,"_"); print a[1]}' | sed 's/.run*.//g'`     
+     echo $name 
+     targetdir=$destination/$name
+     mkdir -p $targetdir
+     ln -s -t $targetdir $file 
+done
+```
+
+
    - genome dir  
    The genome dir contains the bovine reference assembly genome sequence (ARS-UCD1.2) : 
 ```
