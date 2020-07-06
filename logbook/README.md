@@ -460,7 +460,12 @@ As the firsts analyzes are done, and the environment ready to work with true dat
 
 ## Meeting at INRAE :
 
-// TODO
+* [x] Presentation
+* [x] Study of the pipeline
+* [x] Discussion about next step
+* [x] Discussion about the differents methods of normalization
+* [x] Talk about two publication to add to biblio
+* [x] Discussion about the problem while I analyzed the real dataset
 
 ## Try real dataset :
 
