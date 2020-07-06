@@ -18,7 +18,13 @@
 		* [Contact map](#contact-map-)
 		* [MultiQC report](#multiqc-report-)
 	* [Preparation: Presentation Work](#preparation-presentation-work)
-
+* [2020-07-06](#2020-07-06)
+	* [Meeting at INRAE](#meeting-at-inrae-)
+	* [Try real dataset](#try-real-dataset-)
+		* [Script preparation](#script-preparation-)
+		* [Maps creations](#maps-creation-)
+		* [Study of output files](#study-of-output-files-)
+		
 # 2020-07-01
 
 ## Modify wdir/datadir :
@@ -449,3 +455,91 @@ This part describes how contacts are 'organized' after duplicates removal. With 
 ## Preparation: Presentation Work
 
 As the firsts analyzes are done, and the environment ready to work with true data set, I focus my afternoon to prepare a presentation support of these analyze for Monday.
+
+# 2020-07-06
+
+## Meeting at INRAE :
+
+// TODO
+
+## Try real dataset :
+
+### Script preparation :
+
+Head preparation :
+
+```bash
+# Testing the pipeline on a real data set
+# trio1.offspring.run1.Maison-plus fastq files
+wdir=/home/jmartin/work/polledHiC/work/offspring    # The working dir
+runid=nfcorehic.Arrima    # simply a name describing the sample
+datadir=/home/jmartin/work/polledHiC/data
+reads=$datadir/reads/trio1.offspring.Arima    # directory with reads
+genome=$datadir/genome/Bos_taurus.ARS-UCD1.2.dna_sm.toplevel    # path of the genome file with associateds bowtie indexe (see bottom of the page for an example)
+chromsize=/home/jmartin/work/polledHiC/data/genome/chrom.len    # a tab separated file with chromosome length : chr_id   length, one line per chromosome
+outdir=$wdir/$runid
+script=$outdir.sh
+log=$outdir.log
+err=$outdir.err
+
+# Parametre of restriction/ligation
+restriction='^GATC, G^ANTC'
+ligation='GATCGATC, GANTGATC, GANTANTC, GATCANTC'
+```
+
+Then, I replaced the restriction/ligation variable by newest :
+
+```
+50 -  --restriction_site  '"'"'A^AGCTT'"'"' \ -> '"'"$restriction$"'"'
+51 -  --ligation_site     '"'"'AAGCTAGCTT'"'"' \ -> '"'"$ligation"'"'
+```
+
+There are some errors in the pipeline but I can't understand why... The error output is empty, but there is a '.nextflow.log' where we can see this line `juil.-06 09:55:27.980 [main] INFO  nextflow.Nextflow - [nf-core/hic] Pipeline completed with errors
+`.
+
+To try to fix this, I will try with the same genome reference as for test dataset and not with the genome reference I download on my login.
+
+So I replace :
+
+```
+genome=$datadir/genome/Bos_taurus.ARS-UCD1.2.dna_sm.toplevel
+```
+
+by reference available on cluster :
+
+```
+genome=/bank/bowtie2db/ensembl_bos_taurus_genome
+```
+
+It seems that works and that fixed my problem. I have to search an explanation for this comportment.
+
+EDIT : At the end, the job crashed. Exit code = 1...
+
+As the job continue to crash, I tried to re-run the test job : it crashed to. I try to move the `~/.nextflow` directory to `~/save/.nextflow` and to create a symoblic link to give more space to NextFlow (symbolic link tried with /home/jmartin/save/.nextflow and with /save/jmartin/.nextflow).
+
+It seems this solution create new error referenced in `test/nfcorehic.log`: 'impossible de créer le répertoire « /home/jmartin/.nextflow/tmp »: Système de fichiers accessible en lecture seulement'. I try to fix it creating manualy these two directories, but didn't fix anything : nextflow can't write on this directory.
+
+After a `ls -altr ~/save/`, I can see that the two directories `.conda` and `.nextflow` had sames rights, so I purpose that nextflow needs to create its own directories to have good rights. I removed the symbolic link, the directories `save/.nextflow` and I re-runed the test/README.sh .
+
+Executed like this, the test didn't crash. I had to change the runid variable because .err file returned that the job crashed because there is already a job with same name.
+
+I tried to re-run offspring/README.sh , but it continue to crash...
+
+.log file begin by :
+```bash
+N E X T F L O W  ~  version 19.04.0
+Launching `nf-core/hic` [jm-nfcorehic_offspring-Arrima] - revision: 481964d91c [1.1.0]
+WARN: It appears you have never run this project before -- Option `-resume` is ignored
+WARN: Access to undefined parameter `genomes` -- Initialise it to a default value eg. `params.genomes = some_value`
+ERROR ~ /MiSeq
+
+ -- Check '.nextflow.log' file for details
+ ```
+ 
+ When re-running, the error can change to `ERROR ~ /Nanopore`.
+ 
+ Then when I check `.nextflow.log` there is 'juil.-06 10:59:31.193 [main] INFO  nextflow.Nextflow - [nf-core/hic] Pipeline completed with errors'
+ 
+### Maps creations :
+
+### Study of output files :
