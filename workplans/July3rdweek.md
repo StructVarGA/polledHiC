@@ -1,5 +1,5 @@
 
-1. Influence of the provided restriction and ligation motif on the HiC-Pro pipeline  
+1. Influence of the provided restriction and ligation motifs on the HiC-Pro pipeline  
    - Try for example the Maison motifs on data produced using the Arima protocol
    - Check the impact of this misspecification on the MultiQC diagnostics
 
