@@ -545,6 +545,4 @@ ERROR ~ /MiSeq
  
  Then when I check `.nextflow.log` there is 'juil.-06 10:59:31.193 [main] INFO  nextflow.Nextflow - [nf-core/hic] Pipeline completed with errors'
  
-### Maps creations :
-
-### Study of output files :
+ EDIT : The error was du to a bad variable's name attribution.
