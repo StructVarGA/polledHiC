@@ -25,7 +25,7 @@ trio2.offspring.run2.Maison_GACCTGAA-CTCACCAA-AHGCCLBBXY_L007_R2.fastq.gz -> /ho
 ```
 This can be done programmaticaly.
 
-```
+```bash
 datadir=/work2/project/seqoccin/data/reads/hic/bos_taurus
 destination=$TAREGET_ROOT_DIR    # WARNING Change this, for example use ~/work/polledHiC/data/reads
 for file in `ls  $datadir/*fastq.gz`; 
