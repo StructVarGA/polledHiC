@@ -14,3 +14,4 @@
 5. Using hicCorrectMatrix from HiCExplorer normalize the resulting matrices (try both ICE and KRR)
 6. Explore the difference between maps before and after normalization
 7. Extract the main ideas from the paper suggested by Alain: https://www.future-science.com/doi/10.2144/btn-2019-0105
+8. If everything is done, have a look at https://bioconductor.org/packages/devel/bioc/vignettes/HiCBricks/inst/doc/IntroductionToHiCBricks.html
