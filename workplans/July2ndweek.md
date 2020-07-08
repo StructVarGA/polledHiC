@@ -27,7 +27,7 @@ This can be done programmaticaly.
 
 ```bash
 datadir=/work2/project/seqoccin/data/reads/hic/bos_taurus
-destination=$TAREGET_ROOT_DIR    # WARNING Change this, for example use ~/work/polledHiC/data/reads
+destination=$TARGET_ROOT_DIR    # WARNING Change this, for example use ~/work/polledHiC/data/reads
 for file in `ls  $datadir/*fastq.gz`; 
   do 
      base=`basename $file`;   
