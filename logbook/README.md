@@ -22,10 +22,10 @@
 	* [Meeting at INRAE](#meeting-at-inrae-)
 	* [Try real dataset](#try-real-dataset-)
 		* [Script preparation](#script-preparation-)
-		* [Maps creations](#maps-creation-)
-		* [Study of output files](#study-of-output-files-)
 * [2020-07-07](#2020-07-07)
-	* [Run on a real dataset](#run-on-real-dataset-)
+	* [Run on a real dataset](#run-on-a-real-dataset-)
+* [2020-07-08](#2020-07-08)
+	* [New try on Offspring-Arima dataset](#new-try-on-offspring-arima-dataset-)
 		
 # 2020-07-01
 
@@ -564,3 +564,14 @@ Command output:
 **! Note :** *When you precise restriction and ligation site, there shouldn't be space between two pattern i.e restriction='^GATC,G^ANTC' and not restriction='^GATC, G^ANTC'* **!**
 
 On `trio1.offspring.Arima` dataset, the pipeline worked during 6h before an error occured. It looks like there is a problem with bowtie.
+
+# 2020-07-08
+
+## New try on Offspring-Arima Dataset :
+
+After several try, we've found that the time limit was set by a config file in `~/.nextflow/assests/nf-core/hic/conf` but I can't fix this :
+
+* If I try to modify values on this file, the pipeline dosen't exec.
+* If I try to copy config file and to modify config path in the pipeline, there are some errors.
+
+I think the problem is on the profile 'genotoul' configuration but I don't reach yet how to edit or create a new profile configuration.
