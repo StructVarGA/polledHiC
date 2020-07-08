@@ -24,6 +24,8 @@
 		* [Script preparation](#script-preparation-)
 		* [Maps creations](#maps-creation-)
 		* [Study of output files](#study-of-output-files-)
+* [2020-07-07](#2020-07-07)
+	* [Run on a real dataset](#run-on-real-dataset-)
 		
 # 2020-07-01
 
@@ -546,3 +548,19 @@ ERROR ~ /MiSeq
  Then when I check `.nextflow.log` there is 'juil.-06 10:59:31.193 [main] INFO  nextflow.Nextflow - [nf-core/hic] Pipeline completed with errors'
  
  EDIT : The error was du to a bad variable's name attribution.
+	
+# 2020-07-07
+
+## Run on a real dataset :
+
+When I runed the pipeline on Offspring.Arima, the pipeline return an error :
+
+```bash
+Command output:
+  Unable to detect offset for 
+  Please, use '^' to specified the cutting position, i.e A^GATCT for HindIII digestion
+```
+
+**! Note :** *When you precise restriction and ligation site, there shouldn't be space between two pattern i.e restriction='^GATC,G^ANTC' and not restriction='^GATC, G^ANTC'* **!**
+
+On `trio1.offspring.Arima` dataset, the pipeline worked during 6h before an error occured. It looks like there is a problem with bowtie.
