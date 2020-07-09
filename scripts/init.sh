@@ -13,7 +13,7 @@ cd $wdir
 for run in $(ls -d */ | sed 's/\///g')
 do
   # Set parametres
-  runid=nfcore_hic-$run
+  runid=nfcorehic-$run
   outdir=$wdir/$run
   script=$outdir/$runid.sh
   readsdir=$datadir/$run
@@ -71,7 +71,7 @@ mkdir -p '$outdir'
 cd '$outdir'
 
 # most are default options - skipping ICE because normalizing
-each technical replicate is not relevant
+each technical replicate is not relevant. Do not edit first -c argument, but give to the second the path to your personnalized bt2.config
 nextflow run nf-core/hic \
  -revision    1.1.0 \
  -profile     genotoul \
