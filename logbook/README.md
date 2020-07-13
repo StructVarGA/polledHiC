@@ -616,4 +616,4 @@ When I started to work today, I seen that only 2 runs of 15 are completed. About
 
 I controlled the two runs that finished, and I didn't see any issue on logs or errs files.
 
-I re-analyzed the failed runs but I had some failed run quickly because `run name has been already use`..
+After clean my work space, I re-analyzed the failed runs but I had some failed run quickly because `run name has been already use`... I think that it will there be a problem with the space available on my genologin space... The `polledHiC/work/` directory already contains more than 900Gb of data.
