@@ -26,7 +26,11 @@
 	* [Run on a real dataset](#run-on-a-real-dataset-)
 * [2020-07-08](#2020-07-08)
 	* [New try on Offspring-Arima dataset](#new-try-on-offspring-arima-dataset-)
-		
+* [2020-07-09](#2020-07-09)
+  * [All-In-One Script to run pipeline](#all-in-one-script-to-run-pipeline-)
+* [2020-07-10](#2020-07-10)
+* [2020-07-13](#2020-07-13)
+
 # 2020-07-01
 
 ## Modify wdir/datadir :
@@ -541,12 +545,12 @@ WARN: Access to undefined parameter `genomes` -- Initialise it to a default valu
 ERROR ~ /MiSeq
 
  -- Check '.nextflow.log' file for details
- ```
- 
+```
+
  When re-running, the error can change to `ERROR ~ /Nanopore`.
- 
+
  Then when I check `.nextflow.log` there is 'juil.-06 10:59:31.193 [main] INFO  nextflow.Nextflow - [nf-core/hic] Pipeline completed with errors'
- 
+
  EDIT : The error was du to a bad variable's name attribution.
 	
 # 2020-07-07
@@ -575,3 +579,41 @@ After several try, we've found that the time limit was set by a config file in `
 * If I try to copy config file and to modify config path in the pipeline, there are some errors.
 
 I think the problem is on the profile 'genotoul' configuration but I don't reach yet how to edit or create a new profile configuration.
+
+# 2020-07-09
+
+Today I had an email from Thomas who said that he found a solution for our problem. I applied it to my script and it looks like this fix the problem.
+
+## All-In-One Script to run pipeline :
+
+As everything was running, I was able to focus on another All-In-One script to process all of the datasets to study.
+
+I would like this script was able to initiate directly the pipeline on each datasets.
+
+At the end, this script should be able to :
+
+* create a specific working directory for each datasets.
+* create a specific script to run the pipeline for each datasets.
+* submit the job on the cluster for each datasets.
+
+# 2020-07-10
+
+Today I re-write the AIO Script to extract a file that contains paths of all script. This final version of the AIO Script will be available in the Script folder of this repository git.
+
+Also I run all the sbatch scripts to analyze the results next week.
+
+# 2020-07-13
+
+When I started to work today, I seen that only 2 runs of 15 are completed. About the aborted runs :
+
+* two of them returned an error `Unknown error accessing project 'nf-core/hic' -- Repository may be corrupted: /home/jmartin/.nextflow/assets/nf-core/hic`.
+* two of them didn't have good parameters for restriction and ligation fragment (I don't have these information for "Phase" datasets).
+* eight of them were aborted because there were not more space on my work directory.
+* one of them returned an issue in nextflow.log : 
+	
+	> `ERROR nextflow.processor.TaskProcessor - Error executing process > 'getRestrictionFragments (ensembl_bos_taurus_genome [A^AGCTT])'` 
+	> `Caused by:  java.io.IOException: Gestionnaire de fichiers périmés`
+
+I controlled the two runs that finished, and I didn't see any issue on logs or errs files.
+
+I re-analyzed the failed runs but I had some failed run quickly because `run name has been already use`..

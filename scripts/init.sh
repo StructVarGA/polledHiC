@@ -3,6 +3,8 @@ wdir=   # path to work directory i.e. ~/polledHiC/work
 genome=   # path to genome directory i.e. ~/polledHiC/data/genome
 chromsize=   # a tsv file with chromosome length : chr_id length, one line per chromosome
 
+echo '' > $pathscript
+
 for trio in $(ls $datadir)
 do
   mkdir -p $wdir/$trio
@@ -71,7 +73,7 @@ mkdir -p '$outdir'
 cd '$outdir'
 
 # most are default options - skipping ICE because normalizing
-each technical replicate is not relevant. Do not edit first -c argument, but give to the second the path to your personnalized bt2.config
+each technical replicate is not relevant
 nextflow run nf-core/hic \
  -revision    1.1.0 \
  -profile     genotoul \
@@ -103,7 +105,5 @@ nextflow run nf-core/hic \
  --skipCool' > $script
 
   # and finally
-  # sbatch $script
-done  
- 
-
+  echo $script >> $pathscript
+done
