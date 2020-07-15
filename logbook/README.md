@@ -30,6 +30,9 @@
   * [All-In-One Script to run pipeline](#all-in-one-script-to-run-pipeline-)
 * [2020-07-10](#2020-07-10)
 * [2020-07-13](#2020-07-13)
+* [2020-07-15](#2020-07-15)
+  * [Moving work directory](#moving-work-directory-)
+  * [Influence of the provided restriction and ligation motifs](#influence-of-the-provided-restriction-and-ligation-motifs-)
 
 # 2020-07-01
 
@@ -557,7 +560,7 @@ ERROR ~ /MiSeq
 
 ## Run on a real dataset :
 
-When I runed the pipeline on Offspring.Arima, the pipeline return an error :
+When I ran the pipeline on Offspring.Arima, the pipeline return an error :
 
 ```bash
 Command output:
@@ -617,3 +620,19 @@ When I started to work today, I seen that only 2 runs of 15 are completed. About
 I controlled the two runs that finished, and I didn't see any issue on logs or errs files.
 
 After clean my work space, I re-analyzed the failed runs but I had some failed run quickly because `run name has been already use`... I think that it will there be a problem with the space available on my genologin space... The `polledHiC/work/` directory already contains more than 900Gb of data.
+
+* [2020-07-15](#2020-07-15)
+  * [Moving work directory](#moving-work-directory-)
+  * [Influence of the provided restriction and ligation motifs](#influence-of-the-provided-restriction-and-ligation-motifs-)
+  
+# 2020-07-15
+
+## Moving work directory :
+
+To fix the space issue, I moved my working directory on `/work2/genphyse/dynagen/tfaraut/polledHiC/jeremy/`. Here I copy my bt2_end2end.conf and init.sh files. After that I modified all of relatives paths in my init.sh, I can select the path of all protocols from Offspring species.
+
+I ran all analyzes of Offspring less Phase protocol, because I don't have informations concerning restriction and ligation motifs.
+
+## Influence of the provided restriction and ligation motifs :
+
+For the 3rd week, I have to study the influence of the provided restriction and ligation motifs. So I duplicated the trio1.offspring.Arima folder, and I exchanged the motifs for the Arima protocol with the motifs for the Maison protocol.  This study was called trio1.offspring.Arima_to_Maison and ran alongside all the other runs.
