@@ -654,6 +654,10 @@ The analyze of Arima_to_Maison set was very quick. But unfortunately, this analy
 
 Also, there is not any 'results' folder where I could seen any statistics about the pipeline... I suppose that giving bad restriction and ligation motifs return 0 exploitable results to continue the pipeline.
 
+As we can see, the Arima_to_Maison directory don't contains any file of interest to give to us a statistical impact of the provided motifs :
+
+![Arima_to_Maison.ls](.fig/arima_to_maison.ls.png)
+
 ## First steps with COOLER :
 
 During the execution of all analyze, I begin to discover COOLER, a tool that can allow us to sum matrices to have only one matrices and only one map for each species. So I start to search any information of how function cooler and how to sum HiC matrix.
