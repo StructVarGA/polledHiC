@@ -33,6 +33,9 @@
 * [2020-07-15](#2020-07-15)
   * [Moving work directory](#moving-work-directory-)
   * [Influence of the provided restriction and ligation motifs](#influence-of-the-provided-restriction-and-ligation-motifs-)
+* [2020-07-16](#2020-07-16)
+  * [Restriction and ligation motifs](#restriction-and-ligation-motifs-)
+  * [First steps with COOLER](#first-steps-with-cooler-)
 
 # 2020-07-01
 
@@ -636,3 +639,23 @@ I ran all analyzes of Offspring less Phase protocol, because I don't have inform
 ## Influence of the provided restriction and ligation motifs :
 
 For the 3rd week, I have to study the influence of the provided restriction and ligation motifs. So I duplicated the trio1.offspring.Arima folder, and I exchanged the motifs for the Arima protocol with the motifs for the Maison protocol.  This study was called trio1.offspring.Arima_to_Maison and ran alongside all the other runs.
+
+# 2020-07-16
+
+When I resume my studies, I saw that only three of six runs were complete. One of theme didn't have sufficient memory and the two others didn't have enough space.
+
+As recommended by Thomas's mail, I delete the trio2.offspring results and working directory to free disk space and I rerun my analyze.
+
+## Restriction and ligation motifs :
+
+The analyze of Arima_to_Maison set was very quick. But unfortunately, this analyze didn't tell me much information. The run's status is **COMPLETED** but the pipeline didn't compute the MultiQC Report :
+
+![Arima_to_Maison.log](.fig/arima_to_maison.log.png)
+
+Also, there is not any 'results' folder where I could seen any statistics about the pipeline... I suppose that giving bad restriction and ligation motifs return 0 exploitable results to continue the pipeline.
+
+## First steps with COOLER :
+
+During the execution of all analyze, I begin to discover COOLER, a tool that can allow us to sum matrices to have only one matrices and only one map for each species. So I start to search any information of how function cooler and how to sum HiC matrix.
+
+I see that [HiC Explorer](https://hicexplorer.readthedocs.io/en/latest/content/tools/hicSumMatrices.html) can allow us to realize this sum, using cooler as dependencies. I think it's a good beginning step, but I also need to wait that my analyze finished to do a quick statistics report before sum them.
