@@ -36,6 +36,9 @@
 * [2020-07-16](#2020-07-16)
   * [Restriction and ligation motifs](#restriction-and-ligation-motifs-)
   * [First steps with COOLER](#first-steps-with-cooler-)
+* [2020-07-17](#2020-07-17)
+  * [init_hicexplorer.sh](#init_hicexplorer.sh-)
+  * [hicCorrectMatrix and hicSumMatrices](#hiccorrectmatrix-and-hicsummatrices-)
 
 # 2020-07-01
 
@@ -663,3 +666,119 @@ As we can see, the Arima_to_Maison directory don't contains any file of interest
 During the execution of all analyze, I begin to discover COOLER, a tool that can allow us to sum matrices to have only one matrices and only one map for each species. So I start to search any information of how function cooler and how to sum HiC matrix.
 
 I see that [HiC Explorer](https://hicexplorer.readthedocs.io/en/latest/content/tools/hicSumMatrices.html) can allow us to realize this sum, using cooler as dependencies. I think it's a good beginning step, but I also need to wait that my analyze finished to do a quick statistics report before sum them.
+
+# 2020-07-17
+
+## init_hicexplorer.sh :
+
+I wrote a script to convert raw matrices into h5 file. In this script, I put a part to create the chromosomic map, but it required to much memory to run, so I keep it commented.
+
+You can find this script **[HERE](https://github.com/StructVarGA/polledHiC/blob/master/scripts/init_hicexplorer.sh)**.
+
+This script will create subscript on each subdirectories and a text file that contains the path of all subscript. 
+
+Like this, if I want to run all subscripts, it's possible with this loop :
+```bash 
+for path in $(cat HiCExplorer_paths.txt)
+do
+  sbatch $path 
+done
+```
+
+But I still can run only one subscript if I want realize some test.
+
+## hicCorrectMatrix and hicSumMatrices :
+
+When all h5 matrix was available, I can start to do some try with hicCorrectMatrix and hicSumMatrices.
+
+Thank's to *[this guide](https://hicexplorer.readthedocs.io/en/latest/content/example_usage.html#creation-of-a-hi-c-matrix)*, I realized following steps :
+
+```bash
+# Diagnostic plot :
+hicCorrect
+Matrix diagnostic_plot -m h5df/run1.Arima_CTTGTA-CDFVM_L001_1000000.matrix.h5 -o hic_corrected.png
+```
+
+![hic_corrected.png](.fig/hic-explorer/hic_corrected.png)
+
+On this histogram, we can see, we didn't have a beautifull Gaussian like in the guide.
+
+Well I had to choose the filter threshold, I think between -1 and 5 it's a good frame :
+
+```bash
+# Correction
+hicCorrected correct -m h5df/run1.Arima_CTTGTA-CDFVM_L001_1000000.matrix.h5 --filterThreshold -1 5 -o hic_corrected.h5
+```
+I tried to see the diagnostic_plot after correction, and it's possible to see a better Gaussian than precedently
+
+![hic_corrected_v2.png](.fig/hic-explorer/hic_corrected_v2.png)
+
+Thank's to hicInfo, I was able to compare both corrected or un-corrected :
+```
+==> With_correction <==
+# Matrix information file. Created with HiCExplorer's hicInfo version 3.4.3
+File:	hic_corrected.h5
+Size:	4,837
+Bin_length:	1000000
+Sum of matrix:	313477.9415155866
+Non-zero elements:	342,779
+Minimum (non zero):	6.45685757908442e-09
+Maximum:	129.61668024010612
+NaN bins:	0
+
+==> Without_correction <==
+# Matrix information file. Created with HiCExplorer's hicInfo version 3.4.3
+File:	h5df/run1.Arima_CTTGTA-CDFVM_L001_1000000.matrix.h5
+Size:	4,837
+Bin_length:	1000000
+Sum of matrix:	313474.0
+Non-zero elements:	340,732
+Minimum (non zero):	1.0
+Maximum:	114.0
+NaN bins:	0
+```
+
+So we can see that after correction, there are more non-zero elements and the sum of matrix is pretty higher than sin-correction.
+
+Also I tried to sum matrices. I ran the following tests :
+
+* [x] sum run1.Arima_CTTGTA-CDFVM_L001_1000000.matrix.h5 with run2.Arima_CTTGTA-AH5HWKBBXY_L001_1000000.matrix.h5 (I have done the correction of run2 before).
+* [x] sum these two same matrices after correction.
+
+```bash
+# Creation subdirectories :
+mkdir -p sum_experiement/with_corr
+mkdir -p sum_experiment/without_corr
+
+# Sum with corr
+hicSumMatrices -m sum_experiment/with_corr/run1_corrected.h5 sum_experiment/with_corr/run2_corrected.h5 -o sum_experiment/with_corr/sumed_corrected.h5
+
+# Sum without corr
+hicSumMatrices -m h5df/run1.Arima_CTTGTA-CDFVM_L001_1000000.matrix.h5 h5df/run2.Arima_CTTGTA-AH5HWKBBXY_L001_1000000.matrix.h5 -o sum_experiment/without_corr/sumed_uncorrected.h5
+```
+
+After this, hicInfo return the following information :
+```
+==> with_corr/Summed_Infos <==
+# Matrix information file. Created with HiCExplorer's hicInfo version 3.4.3
+File:	sum_experiment/with_corr/sumed_corrected.h5
+Size:	4,837
+Bin_length:	1000000
+Sum of matrix:	24476451.952337086
+Non-zero elements:	5,819,385
+Minimum (non zero):	1.5510828469503455e-05
+Maximum:	10120.509385956626
+NaN bins:	0
+
+==> without_corr/Summed_Infos <==
+# Matrix information file. Created with HiCExplorer's hicInfo version 3.4.3
+File:	sum_experiment/without_corr/sumed_uncorrected.h5
+Size:	4,837
+Bin_length:	1000000
+Sum of matrix:	24612099.5
+Non-zero elements:	5,817,837
+Minimum (non zero):	1.0
+Maximum:	9975.0
+NaN bins:	0
+```
+This is inconsistent with the hicInfo of each independent run. I need to realize a more accurate study...
