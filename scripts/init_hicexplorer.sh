@@ -43,17 +43,18 @@ do
   hicConvertFormat --matrices $mat --outFileName '$h5_mat'/$outname --bedFileHicpro $bedfile --inputFormat hicpro --outputFormat h5
 done
 
+# Sum different runs :
+# //TODO : How to specify for each matrix with same resolution to sum with each other.
+
 # Un-comment these line to create Map.png but it need lot of memory (more than 258G)
 
-# # Create maps
-# cd '$h5_mat'
+# Create maps
+cd '$h5_mat'
 
-# for mat in *.h5
-# do
-  # hicPlotMatrix --matrix $matrix --outFileName ${matrix%.matrix.h5}_map --title ${matrix%.matrix*}
-  # hicPlotMatrix --matrix $matrix --outFileName ${matrix%.matrix.h5}_log1p_map --log1p --title ${matrix%.matrix*}_log1p
-  # hicPlotMatrix --matrix $matrix --outFileName ${matrix%.matrix.h5}_log_map --log --title ${matrix%.matrix*}_log
-# done' > $script
+for mat in *.h5
+do
+  hicPlotMatrix --matrix $matrix --outFileName ${matrix%.matrix.h5}_log_map.png --log --title ${matrix%.matrix*}_log --chromosomeOrder 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X
+done' > $script
   # and finally
   echo $script >> $pathscript
 done
