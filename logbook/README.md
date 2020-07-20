@@ -40,8 +40,8 @@
   * [init_hicexplorer.sh](#init_hicexplorer.sh-)
   * [hicCorrectMatrix and hicSumMatrices](#hiccorrectmatrix-and-hicsummatrices-)
 * [2020-07-20](#2020-07-20)
-  * [Create map : Proccess stoped - Out of Memory](#create-map--process-stoped-out-of-memory-)
-  * [EDIT : init_hicexplorer.sh](#edit-init_hicexplorer.sh-)
+  * [Create map : Proccess stoped - Out of Memory](#create-map--proccess-stoped---out-of-memory)
+  * [EDIT : init_hicexplorer.sh](#edit--init_hicexplorersh-)
 
 # 2020-07-01
 
@@ -676,7 +676,7 @@ I see that [HiC Explorer](https://hicexplorer.readthedocs.io/en/latest/content/t
 
 I wrote a script to convert raw matrices into h5 file. In this script, I put a part to create the chromosomic map, but it required to much memory to run, so I keep it commented.
 
-You can find this script **[HERE](https://github.com/StructVarGA/polledHiC/blob/master/scripts/init_hicexplorer.sh)**.
+You can find this script **[HERE](https://github.com/StructVarGA/polledHiC/commit/b9d542b3f080c5726797aa0887efba9ddea04bb9#diff-8e7271371616aea590c85fd3629f375f)**.
 
 This script will create subscript on each subdirectories and a text file that contains the path of all subscript. 
 
