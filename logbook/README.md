@@ -39,6 +39,9 @@
 * [2020-07-17](#2020-07-17)
   * [init_hicexplorer.sh](#init_hicexplorer.sh-)
   * [hicCorrectMatrix and hicSumMatrices](#hiccorrectmatrix-and-hicsummatrices-)
+* [2020-07-20](#2020-07-20)
+  * [Create map : Proccess stoped - Out of Memory](#create-map--process-stoped-out-of-memory-)
+  * [EDIT : init_hicexplorer.sh](#edit-init_hicexplorer.sh-)
 
 # 2020-07-01
 
@@ -782,3 +785,54 @@ Maximum:	9975.0
 NaN bins:	0
 ```
 This is inconsistent with the hicInfo of each independent run. I need to realize a more accurate study...
+
+# 2020-07-20
+
+## Create map : Proccess stoped - Out of Memory
+
+When I try to create chromosome map with all the genome, I catched 'Out of Memory' error. After several try, I understand that there are lot of unmappable contig on the set and if I focus me only on chromosome and not on chromosome + contigs, I was able to create map !
+
+For instance, with the Arima set, if I run this command from `../trio1.offspring.Arima/hic_results/matrix/`:
+
+```bash
+# Run 1
+hicPlotMatrix --matrix sum_experiment/with_corr/run1_corrected.h5 -o run1_corrected.png --chromosomeOrder 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --log1p
+```
+
+![Arima_run1_map](.fig/hic-explorer/run1_L001_1000000.log1p.png)
+
+```bash
+# Run 2
+hicPlotMatrix --matrix sum_experiment/with_corr/run2_corrected.h5 -o run2_corrected.png --chromosomeOrder 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --log1p
+```
+
+![Arima_run2_map](.fig/hic-explorer/run2_L001_1000000.log1p.png)
+
+```bash
+# Sum of Runs 1 & 2
+hicPlotMatrix --matrix sum_experiment/with_corr/sumed_corrected.h5 -o sumed_corrected.png --chromosomeOrder 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --log1p
+```
+
+![Arima_sum_map](.fig/hic-explorer/sumed_uncorrected.png)
+
+As we can saw, the map is pretty equals between sumed_corrected.png and run2_corrected.png
+
+This can be explained because run2 contains very more informations than run1. I was able to see the same thing with corrected runs :
+
+* **Run 2 - Corrected :**
+![Arima_run2_c_map](.fig/hic-explorer/run2_corrected.png)
+
+* **Sum - Un-corrected :**
+![Arima_sum_c_map](.fig/hic-explorer/sumed_corrected.png)
+
+So I think this results put in relief that a normalization could be necessary.
+
+## EDIT : init_hicexplorer.sh :
+
+I modify the [init_hicexplorer.sh](https://github.com/StructVarGA/polledHiC/blob/master/scripts/init_hicexplorer.sh) script to be able to create contact maps. But I realize that I didn't code how to sum the differents matrices.
+
+I started to think about a solution to do that, but the main problematic is that I need to loop where resolutions are equals (I can't sum a 1000000 bins matrix with a 200000 bins matrix). So I need to find a solution to recognize what is run1 or run2 (or run3 whene there is one) AND what resolution is.
+
+This part is an important TO-DO part to automate my analyze but I need to perform a normalization before so I will put it aside for the moment.
+
+
