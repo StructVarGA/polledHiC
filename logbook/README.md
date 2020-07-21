@@ -42,6 +42,9 @@
 * [2020-07-20](#2020-07-20)
   * [Create map : Proccess stoped - Out of Memory](#create-map--proccess-stoped---out-of-memory)
   * [EDIT : init_hicexplorer.sh](#edit--init_hicexplorersh-)
+* [2020-07-21](#2020-07-21)
+  * [Visio-Reunion](#visio-reunion-)
+  * [Comparison between KR normalization and ICE normalization](#comparison-between-kr-normalization-and-ice-normalization-)
 
 # 2020-07-01
 
@@ -630,10 +633,6 @@ I controlled the two runs that finished, and I didn't see any issue on logs or e
 
 After clean my work space, I re-analyzed the failed runs but I had some failed run quickly because `run name has been already use`... I think that it will there be a problem with the space available on my genologin space... The `polledHiC/work/` directory already contains more than 900Gb of data.
 
-* [2020-07-15](#2020-07-15)
-  * [Moving work directory](#moving-work-directory-)
-  * [Influence of the provided restriction and ligation motifs](#influence-of-the-provided-restriction-and-ligation-motifs-)
-  
 # 2020-07-15
 
 ## Moving work directory :
@@ -716,7 +715,7 @@ I tried to see the diagnostic_plot after correction, and it's possible to see a 
 
 ![hic_corrected_v2.png](.fig/hic-explorer/hic_corrected_v2.png)
 
-Thank's to hicInfo, I was able to compare both corrected or un-corrected :
+Thank's to hicInfo, I was able to compare both corrected with KR-methods (i.e. default choice) or un-corrected :
 ```
 ==> With_correction <==
 # Matrix information file. Created with HiCExplorer's hicInfo version 3.4.3
@@ -833,6 +832,30 @@ I modify the [init_hicexplorer.sh](https://github.com/StructVarGA/polledHiC/blob
 
 I started to think about a solution to do that, but the main problematic is that I need to loop where resolutions are equals (I can't sum a 1000000 bins matrix with a 200000 bins matrix). So I need to find a solution to recognize what is run1 or run2 (or run3 whene there is one) AND what resolution is.
 
-This part is an important TO-DO part to automate my analyze but I need to perform a normalization before so I will put it aside for the moment.
+This part is an important TO-DO part to automate my analyze but I need to perform a better normalization before so I will put it aside for the moment.
 
+# 2020-07-21
+
+## Visio-reunion :
+
+TO-DO :
+
+* [ ] Sum all protocol for a species
+* [ ] Realize diagnostic plot for every h5 matrices (all protocol, all resolutions)
+* [ ] Realize diagnostic plot for summed matrix
+* [ ] Realize a normalization of the summed matrix
+* [ ] Realize diagnostic plot for normalized-summed matrix
+* [ ] hicPlotMatrix on normalized-summed matrix
+* [ ] hicFindTADs & hicPlotTADs of the region gived by Alain
+* [ ] Realize all the precedent steps on an other indiv.
+
+### Sum all protocols matrices
+
+```bash
+mkdir -p h5_diag
+
+for trio in $(ls -d */ | sed 's/\///g')
+do
+  
+```
 
