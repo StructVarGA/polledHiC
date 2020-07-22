@@ -12,7 +12,7 @@ done
 
 cd $wdir
 
-for run in $(ls -d */ | sed 's/\///g')
+for run in $(ls -d trio*/ | sed 's/\///g')
 do
   # Set parametres
   runid=nfcorehic-$run
