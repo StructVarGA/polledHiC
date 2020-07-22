@@ -18,6 +18,9 @@ do
   raw_mat=$outdir/hic_results/matrix/raw
   h5_mat=$outdir/hic_results/matrix/h5df
   
+  sp=${trio%.*}
+  sp=${sp#*.}
+  
   echo '#!/bin/bash
 #SBATCH -J '$runid'
 #SBATCH -e '$err'
@@ -43,17 +46,25 @@ do
   hicConvertFormat --matrices $mat --outFileName '$h5_mat'/$outname --bedFileHicpro $bedfile --inputFormat hicpro --outputFormat h5
 done
 
-# Sum different runs :
-# //TODO : How to specify for each matrix with same resolution to sum with each other.
+# Sum of each resolution for species
+mkdir -p '$hic_studies/$sp'
 
-# Un-comment these line to create Map.png but it need lot of memory (more than 258G)
-
-# Create maps
 cd '$h5_mat'
 
-for mat in *.h5
+for mat1 in *.h5
 do
-  hicPlotMatrix --matrix $matrix --outFileName ${matrix%.matrix.h5}_log_map.png --log --title ${matrix%.matrix*}_log --chromosomeOrder 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X
+  echo mat1 = $mat1
+  for mat2 in *.h5
+  do
+    echo mat2 = $mat2
+    if [[ "$mat1" != "$mat2" ]]; then
+      echo "IF 1 OKAY"
+      if [[ "${mat1#*_*_*_}" == "${mat2#*_*_*_}" ]] ; then
+        echo "IF 2 OKAY"
+        hicSumMatrices --matrices $mat1 $mat2 --outFileName SUM_'$sp'_${mat1#*_*_*_}
+      fi
+    fi
+  done
 done' > $script
   # and finally
   echo $script >> $pathscript
