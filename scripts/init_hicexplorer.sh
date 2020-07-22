@@ -1,9 +1,12 @@
 #!/bin/sh
 
-wdir= # Set here your working directory 
+wdir= # Set here your working directory
 pathscript=$wdir/HiCExplorer_paths.txt
+hic_studies=$wdir/hic_studies
 
 cd $wdir
+
+mkdir -p $hic_studies
 
 echo '' > $pathscript
 
@@ -20,6 +23,8 @@ do
   
   sp=${trio%.*}
   sp=${sp#*.}
+  
+  prot=${trio##*.}
   
   echo '#!/bin/bash
 #SBATCH -J '$runid'
@@ -61,11 +66,11 @@ do
       echo "IF 1 OKAY"
       if [[ "${mat1#*_*_*_}" == "${mat2#*_*_*_}" ]] ; then
         echo "IF 2 OKAY"
-        hicSumMatrices --matrices $mat1 $mat2 --outFileName SUM_'$sp'_${mat1#*_*_*_}
+        hicSumMatrices --matrices $mat1 $mat2 --outFileName '$hic_studies/$sp'/SUM_'$sp'_'$prot'_${mat1#*_*_*_}
       fi
     fi
   done
 done' > $script
   # and finally
   echo $script >> $pathscript
-done
+done   

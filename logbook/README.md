@@ -44,7 +44,8 @@
   * [EDIT : init_hicexplorer.sh](#edit--init_hicexplorersh-)
 * [2020-07-21](#2020-07-21)
   * [Visio-Reunion](#visio-reunion-)
-  * [Comparison between KR normalization and ICE normalization](#comparison-between-kr-normalization-and-ice-normalization-)
+* [2020-07-22](#2020-07-22)
+  * [Automate to sum matrices](#automate-to-sum-matrices-) 
 
 # 2020-07-01
 
@@ -851,11 +852,66 @@ TO-DO :
 
 ### Sum all protocols matrices
 
-```bash
-mkdir -p h5_diag
+This a first writing algorithme to do the sum of matrices
 
-for trio in $(ls -d */ | sed 's/\///g')
+```bash
+# Create hic_studies directory & species subdirectories
+mkdir -p hic_studies
+
+for each species
 do
-  
+  mkdir -p hic_studies/species
+done
+
+# Sum matrices of a protocol
+for mat1 in sp.prot/hic_results/matrix/h5df/*.h5
+do
+  for mat2 in sp.prot/hic_results/matrix/h5df/*.h5
+  do
+    if mat1 != mat2 ; then
+      if resolution mat1 == resolution mat2 ; then
+        hicSumMatrices --matrices mat1 mat2 --outFileName SUM_$sp_$prot_RESOLUTION.h5
+      fi
+    fi
+  done
+done
 ```
 
+# 2020-07-22
+
+## Automate to sum matrices :
+
+I add on init_hicexplorer.sh a part to sum matrice of same resolution, based on previous algorithme :
+
+```bash
+# hic_studies VAR
+hic_studies=$wdir/hic_studies
+
+# Species and protocol VAR
+  sp=${trio%.*}
+  sp=${sp#*.}
+  prot=${trio##*.}
+
+# Sum of each resolution for species
+mkdir -p '$hic_studies/$sp'
+
+cd '$h5_mat'
+
+for mat1 in *.h5
+do
+  echo mat1 = $mat1
+  for mat2 in *.h5
+  do
+    echo mat2 = $mat2
+    if [[ "$mat1" != "$mat2" ]]; then
+      echo "IF 1 OKAY"
+      if [[ "${mat1#*_*_*_}" == "${mat2#*_*_*_}" ]] ; then
+        echo "IF 2 OKAY"
+        hicSumMatrices --matrices $mat1 $mat2 --outFileName '$hic_studies/$sp'/SUM_'$sp'_'$prot'_${mat1#*_*_*_}
+      fi
+    fi
+  done
+done
+```
+
+Like this, after each raw matrices were converted to h5df format, this script will allow us to sum matrices if then have same resolution and will provide us to sum a matrix with themselves.
