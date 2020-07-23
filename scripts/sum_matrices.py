@@ -37,12 +37,13 @@ def write_metadata(trio):
         if indiv != ind:
             if entry is not None:
                 entry = entry[:-1] + "\n"
-                print("Write : {} on {}/metadata.tsv".format(entry[:-1], hic_dir))
+                print(f"Write : {entry[:-1]} on {hic_dir}/metadata.tsv")
                 fh.writelines(entry)
             indiv = ind
             protocols = prot + ','
     entry = entry[:-1] + "\n"
     print("Write : {} on {}/metadata.tsv".format(entry[:-1], hic_dir))
+    print()
     fh.writelines(entry)
     fh.close()
 
@@ -52,10 +53,8 @@ def make_subdir(trio):
         sp = indiv.split('.')[1]
         path = hic_dir + sp
         if not os.path.exists(path):
-            print("Creation of {} directory".format(path))
+            print(f"Creation of {path} directory")
             os.system(command='mkdir -p ' + path)
-        else:
-            print("{} already exists".format(path))
 
 
 def create_matrice_directory():
@@ -76,7 +75,7 @@ def create_matrice_directory():
                         for k in RES_DIC.keys():
                             mat_path = []
                             for mat in os.listdir(wdir+ind_dir+h5_path):
-                                if re.search(r'{}.matrix.h5'.format(k), mat) is not None:
+                                if re.search(rf'{k}.matrix.h5', mat) is not None:
                                     mat_path.append(wdir+ind_dir+h5_path+mat)
                                     RES_DIC[k][pt.replace('\n', '')] = mat_path
                     except OSError:
@@ -99,11 +98,11 @@ if __name__ == '__main__':
     print("Verifing hic_studies directory exist :")
     if not os.path.exists(hic_dir):
         print("hic_studies directory not found \n"
-              "Creation of {}".format(hic_dir))
+              f"Creation of {hic_dir}")
         os.makedirs(hic_dir)
-        print("Done.")
+        print("Done. \n")
     else:
-        print("{} founded.".format(hic_dir))
+        print(f"{hic_dir} founded. \n")
 
     # Set metadata file :
     TRIO = set_trio(wdir)
@@ -116,9 +115,14 @@ if __name__ == '__main__':
     matrices = create_matrice_directory()
     
     # Sum all matrices
+    print("Begining to sum matrices ...")
     for res in matrices.keys():
+        print()
+        print(f"... at {res} bins resolutions ...")
         for prot in matrices[res].keys():
+            print(f"... sum {prot} ...", end = '')
             mats = " ".join(matrices[res][prot])
-            cmd = "hicSumMatrices --matrices {} --outFileName {}{}_{}.h5".format(mats, hic_dir, prot, res)
-            
-            os.system(command=cmd)
+            cmd = f"hicSumMatrices --matrices {mats} --outFileName {hic_dir}{prot}_{res}.h5"
+
+            # os.system(command=cmd)
+            print(" done !")
