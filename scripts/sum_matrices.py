@@ -49,14 +49,17 @@ def write_metadata(trio):
 
 def make_subdir(trio):
     for indiv in trio:
-        sp = indiv.split('.')[1]
-        path = hic_dir + sp
+        prot = indiv.split('.')[2]
+        path = hic_dir + prot
         if not os.path.exists(path):
             print(f"Creation of {path} directory")
             os.system(command = 'mkdir -p ' + path)
+    if not os.path.exists(hic_dir + 'Fused_mat'):
+        print(f"Create of {hic_dir}Fused_mat/ directory")
+        os.system(command = 'mkdir -p ' + hic_dir + 'Fused_mat/')
 
 
-def create_matrice_directory():
+def create_matrice_dictionary():
     h5_path = 'hic_results/matrix/h5df/'
     metadata = hic_dir + 'metadata.tsv'
     RES_DIC = {1000000 : {}, 500000 : {}, 200000 : {}, 50000 : {}}
@@ -75,7 +78,7 @@ def create_matrice_directory():
                             mat_path = []
                             for mat in os.listdir(wdir+ind_dir+h5_path):
                                 if re.search(rf'{k}.matrix.h5', mat) is not None:
-                                    mat_path.append(wdir+ind_dir+h5_path+mat)
+                                    mat_path.append((wdir+ind_dir+h5_path+mat).replace('\n',''))
                                     RES_DIC[k][pt.replace('\n', '')] = mat_path
                     except FileNotFoundError:
                         continue
@@ -110,17 +113,30 @@ if __name__ == '__main__':
     make_subdir(TRIO)
 
     # Extract paths of matrices
-    matrices = create_matrice_directory()
-    
-    # Sum all matrices
+    matrices = create_matrice_dictionary()
+
+    # Sum all matrices for each individus
     print("Begining to sum matrices ...")
     for res in matrices.keys():
-        print()
         print(f"... at {res} bins resolutions ...")
         for prot in matrices[res].keys():
             print(f"... sum {prot} ...", end = '')
             mats = " ".join(matrices[res][prot])
-            cmd = f"hicSumMatrices --matrices {mats} --outFileName {hic_dir}{prot}_{res}.h5"
-
+            cmd = f"hicSumMatrices --matrices {mats} --outFileName {hic_dir}{prot}/{prot}_{res}.h5"
             os.system(command = cmd)
             print(" done !")
+    print("\n", \
+        "All matrices available summed for each indiv. ! \n")
+
+    # Sum all matrices between each individus
+    print("Begining to sum matrices ...")
+    for res in matrices.keys():
+        print(f"... all matrices at {res} bins resolutions ...", end = '')
+        mats = ''
+        for val in matrices[res].values():
+            mats += " ".join(val)
+        cmd = f"hicSumMatrices --matrices {mats} --outFileName {hic_dir}Fused_mat/FUSED_{res}.h5"
+        os.system(command = cmd)
+        print(" done !")
+    print("\n", \
+        "All matrices available summed ! \n")
