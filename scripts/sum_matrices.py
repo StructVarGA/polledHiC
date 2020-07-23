@@ -42,8 +42,7 @@ def write_metadata(trio):
             indiv = ind
             protocols = prot + ','
     entry = entry[:-1] + "\n"
-    print("Write : {} on {}/metadata.tsv".format(entry[:-1], hic_dir))
-    print()
+    print("Write : {} on {}/metadata.tsv \n".format(entry[:-1], hic_dir))
     fh.writelines(entry)
     fh.close()
 
@@ -54,7 +53,7 @@ def make_subdir(trio):
         path = hic_dir + sp
         if not os.path.exists(path):
             print(f"Creation of {path} directory")
-            os.system(command='mkdir -p ' + path)
+            os.system(command = 'mkdir -p ' + path)
 
 
 def create_matrice_directory():
@@ -124,5 +123,5 @@ if __name__ == '__main__':
             mats = " ".join(matrices[res][prot])
             cmd = f"hicSumMatrices --matrices {mats} --outFileName {hic_dir}{prot}_{res}.h5"
 
-            # os.system(command=cmd)
+            os.system(command = cmd)
             print(" done !")
