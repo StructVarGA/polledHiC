@@ -3,3 +3,6 @@ work/*
 
 ## Ignore data/ directory
 data/*
+
+## Ignore vscode/ directory
+.vscode/*
