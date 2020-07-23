@@ -42,7 +42,7 @@ def write_metadata(trio):
             indiv = ind
             protocols = prot + ','
     entry = entry[:-1] + "\n"
-    print("Write : {} on {}/metadata.tsv \n".format(entry[:-1], hic_dir))
+    print(f"Write : {entry[:-1]} on {hic_dir}/metadata.tsv \n")
     fh.writelines(entry)
     fh.close()
 
