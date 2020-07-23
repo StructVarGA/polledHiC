@@ -77,9 +77,8 @@ def create_matrice_directory():
                                 if re.search(rf'{k}.matrix.h5', mat) is not None:
                                     mat_path.append(wdir+ind_dir+h5_path+mat)
                                     RES_DIC[k][pt.replace('\n', '')] = mat_path
-                    except OSError:
+                    except FileNotFoundError:
                         continue
-                    
     return RES_DIC
 
 
