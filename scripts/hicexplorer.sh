@@ -31,12 +31,14 @@ do
   mkdir -p $h5_mat
 
   # Conversion raw matrix -> h5df
-  for mat in $raw_mat/*.matrix
-  do
-    bedfile=${mat%.matrix}_abs.bed
-    outname=${mat##*trio1.offspring.}
-    hicConvertFormat --matrices $mat --outFileName $h5_mat/$outname --bedFileHicpro $bedfile --inputFormat hicpro --outputFormat h5
-  done
+  if [ -d $raw_mat ] ; then
+    for mat in $raw_mat/*.matrix
+    do
+      bedfile=${mat%.matrix}_abs.bed
+      outname=${mat##*trio1.offspring.}
+      hicConvertFormat --matrices $mat --outFileName $h5_mat/$outname --bedFileHicpro $bedfile --inputFormat hicpro --outputFormat h5
+    done
+  fi
 done
 
 # Sum matrices 
