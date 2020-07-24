@@ -140,3 +140,13 @@ if __name__ == '__main__':
         print(" done !")
     print("\n", \
         "All matrices available summed ! \n")
+
+    # Do diagnostic plot
+    print("Begining to realize diagnostic plot...")
+    for fused_mat in os.listdir(hic_dir + 'Fused_mat/'):
+        print(f"... Diagnostic plot of {fused_mat} ...", end = '')
+        cmd = f"hicCorrectMatrix diagnosticèplot --matrix {hic_dir}Fused_mat/{fused_mat} --plotName {hic_dir}Fused_mat/{fused_mat.replace('h5', 'png')}"
+        os.system(command = cmd)
+        print(" done !")
+    print(" \n", \
+        "All histograms plotted ! \n")
