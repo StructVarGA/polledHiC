@@ -977,8 +977,6 @@ As we can see, it seems better to exploit only datas from 200000 bins and 50000 
 
 It seems to it's possible to take the same threeshold at -1.5 to 5 with both of them, so I can do an ICE correction for these two :
 
-
-
 ```bash
 # Move to output directory :
 cd $workdir/hic_manual
@@ -990,3 +988,101 @@ hicCorrectMatrix correct -m OFFSPRING_200000.matrix.h5 -o OFFSPRING_200000.corre
 hicCorrectMatrix correct -m OFFSPRING_50000.matrix.h5 -o OFFSPRING_50000.corrected_matrix.h5 -t -1.5 5
 ```
 
+I wasn't able to plot the heatmap from 50k bins resolutions.
+
+To continue, I try to run hicFindTADs and hicPlotTADs :
+
+```bash
+# 200k bins resolution :
+hicFindTADs -m OFFSPRING_200000.corrected_matrix.h5 --outPrefix TADs_200000 -correctForMultipleTesting fdr
+
+echo '[x-axis]
+where = top
+
+[hic matrix]
+file = OFFSPRING_200000.corrected_matrix.h5
+title = Hi-C data
+# depth is the maximum distance plotted in bp. In Hi-C tracks
+# the height of the track is calculated based on the depth such
+# that the matrix does not look deformed
+transform = log1p
+file_type = hic_matrix
+
+[tads]
+file = TADs_200000_domains.bed
+file_type = domains
+border_color = black
+color = none
+# the tads are overlay over the hic-matrix
+# the share-y options sets the y-axis to be shared
+# between the Hi-C matrix and the TADs.
+overlay_previous = share-y' > tracks_200000.ini
+
+# 50k bins resolution :
+hicFindTADs -m OFFSPRING_50000.corrected_matrix.h5 --outPrefix TADs_50000 --correctForMultipleTesting fdr
+
+echo '[x-axis]
+where = top                              
+
+[hic matrix]
+file = OFFSPRING_50000.corrected_matrix.h5
+title = Hi-C data
+# depth is the maximum distance plotted in bp. In Hi-C tracks
+# the height of the track is calculated based on the depth such
+# that the matrix does not look deformed
+transform = log1p
+file_type = hic_matrix
+
+[tads]
+file = TADs_50000_domains.bed
+file_type = domains
+border_color = black
+color = none
+# the tads are overlay over the hic-matrix
+# the share-y options sets the y-axis to be shared
+# between the Hi-C matrix and the TADs.
+overlay_previous = share-y' > tracks_50000.ini
+```
+
+hicPlotTADs didn't  function with slurm's module, so I load my proper hicexplorer conda envs `conda activate /home/jmartin/.conda/envs/hicexplorer`, then :
+
+**200k bins resolutions :**
+```bash
+hicPlotTADs --tracks tracks_200000.ini -o TADs_200000_1_1-6M.png --region 1:1-6000000
+```
+
+This didn't run :
+```bash
+INFO:pygenometracks.tracksClass:initialize 1. [x-axis]
+INFO:pygenometracks.tracksClass:initialize 2. [hic matrix]
+WARNING:hicmatrix.HiCMatrix:Bin size is not homogeneous.                                       Median 200000
+
+INFO:pygenometracks.tracks.GenomeTrack:Filling main diagonal with max value because it empty and looks bad...
+
+Traceback (most recent call last):
+  File "/home/jmartin/.conda/envs/hicexplorer/bin/hicPlotTADs", line 7, in <module>
+    main()
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/hicexplorer/hicPlotTADs.py", line 9, in main
+    plotTracks.main(args)
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/pygenometracks/plotTracks.py", line 278, in main
+    track_label_width=args.trackLabelFraction)
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/pygenometracks/tracksClass.py", line 103, in __init__
+    self.track_obj_list.append(track_class(properties))
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/pygenometracks/tracks/HiCMatrixTrack.py", line 83, in __init__
+    super(HiCMatrixTrack, self).__init__(*args, **kwargs)
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/pygenometracks/tracks/GenomeTrack.py", line 49, in __init__
+    self.set_properties_defaults()
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/pygenometracks/tracks/HiCMatrixTrack.py", line 154, in set_properties_defaults
+    max_value = self.hic_ma.matrix.data.max()
+  File "/home/jmartin/.conda/envs/hicexplorer/lib/python3.6/site-packages/numpy/core/_methods.py", line 30, in _amax
+    return umr_maximum(a, axis, None, out, keepdims, initial, where)
+ValueError: zero-size array to reduction operation maximum which has no identity
+```
+
+**50k bins resolutions :**
+```bash
+hicPlotTADs --tracks tracks_50000.ini -o TADs_50k_1_1-6M.png --region 1:1-6000000
+```
+
+Return this fig :
+![TADs_50k_1-6M](.fig/hic-explorer/TADs_50k_1_1-6M.png)
