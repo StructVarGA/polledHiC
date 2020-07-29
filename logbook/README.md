@@ -46,6 +46,8 @@
   * [Visio-Reunion](#visio-reunion-)
 * [2020-07-22](#2020-07-22)
   * [Automate to sum matrices](#automate-to-sum-matrices-) 
+* [2020-07-29](#2020-07-29)
+  * [Preparation for afternoon calling](#preparation-for-afternoon-calling-)
 
 # 2020-07-01
 
@@ -841,9 +843,9 @@ This part is an important TO-DO part to automate my analyze but I need to perfor
 
 TO-DO :
 
-* [ ] Sum all protocol for a species
+* [X] Sum all protocol for a species
 * [ ] Realize diagnostic plot for every h5 matrices (all protocol, all resolutions)
-* [ ] Realize diagnostic plot for summed matrix
+* [X] Realize diagnostic plot for summed matrix
 * [ ] Realize a normalization of the summed matrix
 * [ ] Realize diagnostic plot for normalized-summed matrix
 * [ ] hicPlotMatrix on normalized-summed matrix
@@ -915,3 +917,76 @@ done
 ```
 
 Like this, after each raw matrices were converted to h5df format, this script will allow us to sum matrices if then have same resolution and will provide us to sum a matrix with themselves.
+
+# 2020-07-29
+
+## Preparation for afternoon calling :
+
+As I encountred severals problem with TADs plotting, we organized a call reunion this afternoon. 
+
+In preparation for this reunion, I had to reorganized properly all the analyzes realized during this days. To re-start efficiently, I removed all content of hic_manual datas and I run these commands :
+
+```bash
+# Necessary SLURM modules
+module purge
+module load system/Miniconda3-4.7.10
+module load bioinfo/HiCExplorer-v3.4.3
+
+# Environment variables
+resolutions="1000000.matrix.h5 500000.matrix.h5 200000.matrix.h5 50000.matrix.h5"
+workdir='/work2/genphyse/dynagen/jmartin/polledHiC/work'
+
+# Sum of OFFSPRING protocols matrices
+for res in $resolutions
+do
+  paths=''
+  for mat in $(ls trio1.offspring.*/hic_results/matrix/h5df/*.h5)
+  do
+    if [[ $mat =~ $res ]] ; then
+      paths+="$workdir/$mat "
+    fi
+  done
+  hicSumMatrices --matrices $paths --outFileName $workdir/hic_manual/OFFSPRING_$res
+done
+
+# Diagnostic plot of summed matrices
+for mat in $workdir/hic_manual/*.h5
+do
+  hicCorrectMatrix diagnostic_plot -m $mat -o ${mat%.matrix.h5}.diag_plot.png
+done
+```
+
+All of the output are available in : `/work2/genphyse/dynagen/jmartin/polledHiC/work/hic_manual`
+
+Below we can see all the diagnostic plots for each resolution :
+
+**1000000 bins :**
+
+![res_1000000](.fig/hic-explorer/OFFSPRING_1000000.diag_plot.png)
+
+**500000 bins :**
+![res_500000](.fig/hic-explorer/OFFSPRING_500000.diag_plot.png)
+
+**200000 bins:**
+![res_200000](.fig/hic-explorer/OFFSPRING_200000.diag_plot.png)
+
+**50000 bins:**
+![res_50000](.fig/hic-explorer/OFFSPRING_50000.diag_plot.png)
+
+As we can see, it seems better to exploit only datas from 200000 bins and 50000 bins resolutions, because the firsts two don't return a good 'Gaussian'.
+
+It seems to it's possible to take the same threeshold at -1.5 to 5 with both of them, so I can do an ICE correction for these two :
+
+
+
+```bash
+# Move to output directory :
+cd $workdir/hic_manual
+
+# Correction of 200000 bins resolution :
+hicCorrectMatrix correct -m OFFSPRING_200000.matrix.h5 -o OFFSPRING_200000.corrected_matrix.h5 -t -1.5 5
+
+# Correction of 50000 bins resolution :
+hicCorrectMatrix correct -m OFFSPRING_50000.matrix.h5 -o OFFSPRING_50000.corrected_matrix.h5 -t -1.5 5
+```
+

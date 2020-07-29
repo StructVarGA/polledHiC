@@ -1,4 +1,4 @@
-#!/tools/python/3.7.4/bin/python
+#!/usr/bin/env python3
 
 """This python script allow to run an hicexplorer pipeline to sum matrices and to do
 a diagnostic plot. To run it, you need to give as argument the path of hic_directory
@@ -84,6 +84,17 @@ def create_matrice_dictionary():
                         continue
     return RES_DIC
 
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Merging two HiC matrices sharing the same bins')
+    parser.add_argument('-a', '--matrix_file_A',
+                        required=True, help='A first matrix file')
+    parser.add_argument('-b', '--matrix_file_B',
+                        required=True, help='A second marix file')
+
+    args = parser.parse_args()
+    return args
+    
 
 if __name__ == '__main__':
     # Set Working directory :
