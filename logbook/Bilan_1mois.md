@@ -2,7 +2,7 @@
   * [**Étape 1 :** Conversion raw_matrix -> h5_matrix](#étape-1--conversion-raw_matrix---h5_matrix)
   * [**Étape 2 :** Somme des matrices](#étape-2--somme-des-matrices)
   * [**Étape 3 :** Diagnostic plot](#étape-3--diagnostic-plot)
-  * [**Étape 4 :** Normalisation KR](#étape-4--normalisation--kr)
+  * [**Étape 4 :** Normalisation KR](#étape-4--normalisation-kr)
   * [**Étape 5 :** Carte chromosomique de la region](#étape-5--carte-chromosomique-de-la-region)
   * [**Étape 6 :** hicFindTADs](#étape-6--hicfindtads)
   * [**Étape 7 :** tracks.ini et hicPlotTADs](#étape-7--tracksini-et-hicplottads)
