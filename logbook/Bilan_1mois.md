@@ -1,4 +1,5 @@
 * [**Premier bilan HiC-Explorer**](#premier-bilan-hic-explorer)
+* [**OFFSPRING**](#offspring-)
   * [**Étape 1 :** Conversion raw_matrix -> h5_matrix](#étape-1--conversion-raw_matrix---h5_matrix)
   * [**Étape 2 :** Somme des matrices](#étape-2--somme-des-matrices)
   * [**Étape 3 :** Diagnostic plot](#étape-3--diagnostic-plot)
@@ -6,8 +7,11 @@
   * [**Étape 5 :** Carte chromosomique de la region](#étape-5--carte-chromosomique-de-la-region)
   * [**Étape 6 :** hicFindTADs](#étape-6--hicfindtads)
   * [**Étape 7 :** tracks.ini et hicPlotTADs](#étape-7--tracksini-et-hicplottads)
+* [**FATHER**](#father-)
 
 # Premier bilan HiC-Explorer
+
+# OFFSPRING :
 
 Cette première étude permet de faire le bilan sur les différentes étapes ayant permis l'analyse de l’individu Offspring.
 
@@ -413,12 +417,74 @@ done
 
 ### hicPlotTADs : OFFSPRING_50000.corrected_matrix.h5
 
-![offspring_50k_tads](.fig/bilan-050820/tracks_TADs_50000.corrected_matrix_1m-6m.png)
+![offspring_50k_tads](.fig/bilan-050820/tracks_TADs_OFFSPRING_50000.corrected_matrix_1m-6m.png)
 
 ### hicPlotTADs : OFFSPRING_Dovetail_50000.corrected_matrix.h5
 
-![offspring_dov_50k_tads](.fig/bilan-050820/tracks_TADs_Dovetail_50000.corrected_matrix_1m-6m.png)
+![offspring_dov_50k_tads](.fig/bilan-050820/tracks_TADs_OFFSPRING_Dovetail_50000.corrected_matrix_1m-6m.png)
 
 ### hicPlotTADs : OFFSPRING_Maison-plus_50000.corrected_matrix.h5
 
-![offspring_mai+_50k_tads](.fig/bilan-050820/tracks_TADs_Maison-plus_50000.corrected_matrix_1m-6m.png)
+![offspring_mai+_50k_tads](.fig/bilan-050820/tracks_TADs_OFFSPRING_Maison-plus_50000.corrected_matrix_1m-6m.png)
+
+# FATHER :
+
+Cette seconde étude permet de faire le parallèle entre l'analyse de l'individus Offspring et Father.
+
+```bash
+cd /work2/genphyse/dynagen/jmartin/polledHiC/work/hic_050820/FATHER/
+```
+
+## Diagnostic plot :
+
+Le diagnostic plot des jeux de donnée retourne une Gaussienne :
+
+![father_diagnostic](.fig/bilan-050820/FATHER_50000.png)
+
+La correction cependant, entraine une déformation de l'histogramme :
+
+![father_diagnostic_corr](.fig/bilan-050820/FATHER_50000.corrected.png)
+
+## hicPlotMatrix :
+
+En se concentrant sur la résolutions 50k bins, voici un parallèle des hicPlotMatrix :
+
+![father_vs_offspring_chr1_1m-6m](.fig/bilan-050820/50k_Father_vs_Offspring.png)
+
+## hicFindTADs :
+
+```bash
+==> FATHER/TADs_50000.corrected_matrix_domains.bed <==
+1	700000	1100000	ID_0.01_1	-1.399420672147	.	700000	1100000	31,120,180
+1	1100000	1700000	ID_0.01_2	-0.365205258240	.	1100000	1700000	51,160,44
+1	1700000	2400000	ID_0.01_3	-0.542296772523	.	1700000	2400000	31,120,180
+1	2400000	3300000	ID_0.01_4	0.324797479133	.	2400000	3300000	51,160,44
+1	3300000	3950000	ID_0.01_5	-0.349479810060	.	3300000	3950000	31,120,180
+1	3950000	4500000	ID_0.01_6	-0.386339597394	.	3950000	4500000	51,160,44
+1	4500000	6700000	ID_0.01_7	-0.876915765203	.	4500000	6700000	31,120,180
+1	6700000	7350000	ID_0.01_8	-0.875936112726	.	6700000	7350000	51,160,44
+1	7350000	9500000	ID_0.01_9	-1.287358640949	.	7350000	9500000	31,120,180
+1	9500000	10150000	ID_0.01_10	-0.721336611846	.9500000	10150000	51,160,44
+
+==> OFFSPRING/TADs_50000.corrected_matrix_domains.bed <==
+1	1100000	1700000	ID_0.01_1	-0.355780866055	.	1100000	1700000	31,120,180
+1	1700000	2400000	ID_0.01_2	-0.716555453651	.	1700000	2400000	51,160,44
+1	2400000	2700000	ID_0.01_3	0.670195923987	.	2400000	2700000	31,120,180
+1	2700000	3100000	ID_0.01_4	-0.016125032246	.	2700000	3100000	51,160,44
+1	3100000	3900000	ID_0.01_5	-0.366331532318	.	3100000	3900000	31,120,180
+1	3900000	4500000	ID_0.01_6	-0.620369787357	.	3900000	4500000	51,160,44
+1	4500000	5700000	ID_0.01_7	-0.820333782808	.	4500000	5700000	31,120,180
+1	5700000	6100000	ID_0.01_8	-0.039270566058	.	5700000	6100000	51,160,44
+1	6100000	6700000	ID_0.01_9	-0.291369979504	.	6100000	6700000	31,120,180
+1	6700000	7400000	ID_0.01_10	-0.915781690326	.	6700000	7400000	51,160,44
+```
+
+## hicPlotTADs :
+
+### FATHER_50000.corrected_matrix.h5
+
+![tads_fathers_50k](.fig/bilan-050820/tracks_TADs_FATHER_50000.png)
+
+### FATHER_Arima_50000.corrected_matrix.h5
+
+![tads_father_arima_50k](.fig/bilan-050820/tracks_TADs_FATHER_Arima_50000.png)
