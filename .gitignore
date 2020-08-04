@@ -6,3 +6,6 @@ data/*
 
 ## Ignore vscode/ directory
 .vscode/*
+
+## Ignore jupyter notebook checkpoints
+notebooks/.ipynb_checkpoints/*
