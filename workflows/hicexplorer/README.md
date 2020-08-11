@@ -18,5 +18,5 @@ conda activate hicexplorer3env
 ```
 
 ```
-snakemake -p -n
+snakemake --jobs 4 -p -n
 ```
