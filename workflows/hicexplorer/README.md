@@ -18,5 +18,6 @@ conda activate hicexplorer3env
 ```
 
 ```
-snakemake -p -n
+snakemake --jobs 4 -p -n
 ```
+When lauching snakemake on a node, the number of necessary (requested) cpus is related to the number of jobs and of cpus for each job (e.g for hicexplorer)
