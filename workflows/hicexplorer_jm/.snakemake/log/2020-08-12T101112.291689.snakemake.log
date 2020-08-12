@@ -1,0 +1,3 @@
+NameError in line 75 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+name 'wildcard' is not defined
+  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile", line 75, in <module>

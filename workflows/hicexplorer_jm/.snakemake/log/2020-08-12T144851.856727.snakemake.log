@@ -1,0 +1,7 @@
+Building DAG of jobs...
+InputFunctionException in line 87 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+KeyError: 'merged'
+Wildcards:
+sample=trio1.offspring
+protocol=merged
+resolution=200000

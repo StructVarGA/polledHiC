@@ -1,0 +1,10 @@
+FileNotFoundError in line 57 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+[Errno 2] File sampled_protocols.tsv does not exist: 'sampled_protocols.tsv'
+  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile", line 57, in <module>
+  File "/usr/local/bioinfo/src/Snakemake/snakemake-5.8.1_venv/lib/python3.6/site-packages/pandas/io/parsers.py", line 676, in parser_f
+  File "/usr/local/bioinfo/src/Snakemake/snakemake-5.8.1_venv/lib/python3.6/site-packages/pandas/io/parsers.py", line 448, in _read
+  File "/usr/local/bioinfo/src/Snakemake/snakemake-5.8.1_venv/lib/python3.6/site-packages/pandas/io/parsers.py", line 880, in __init__
+  File "/usr/local/bioinfo/src/Snakemake/snakemake-5.8.1_venv/lib/python3.6/site-packages/pandas/io/parsers.py", line 1114, in _make_engine
+  File "/usr/local/bioinfo/src/Snakemake/snakemake-5.8.1_venv/lib/python3.6/site-packages/pandas/io/parsers.py", line 1891, in __init__
+  File "pandas/_libs/parsers.pyx", line 374, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 674, in pandas._libs.parsers.TextReader._setup_parser_source

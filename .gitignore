@@ -9,3 +9,7 @@ data/*
 
 ## Ignore jupyter notebook checkpoints
 notebooks/.ipynb_checkpoints/*
+
+## Ignore 
+workflows/hicexplorer_jm/HiCExplorer-pipeline/*
+workflows/hicexplorer/trio1.offspring/*

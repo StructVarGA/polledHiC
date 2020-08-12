@@ -1,0 +1,22 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	2	adjust
+	1	all
+	2	correct
+	2	normalize
+	19	plotMatrix
+	26
+
+[Wed Aug 12 15:37:00 2020]
+rule plotMatrix:
+    input: trio1.offspring/merged/200000/corrected.h5
+    output: trio1.offspring/merged/200000/1:1000000-6000000_plot.png
+    jobid: 2
+    wildcards: sample=trio1.offspring, resolution=200000, region=1:1000000-6000000
+
+RuleException in line 138 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+NameError: The name 'region' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}

@@ -1,0 +1,18 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	all
+	2	correct
+	2	normalize
+	20	plotMatrix
+	25
+
+[Wed Aug 12 15:07:13 2020]
+rule plotMatrix:
+    input: trio1.father/merged/200000/corrected.h5
+    output: trio1.father/merged/200000/1:2200000-2800000_plot.png
+    jobid: 15
+    wildcards: sample=trio1.father, resolution=200000, region=1:2200000-2800000
+
+RuleException in line 138 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+NameError: The name 'region' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}

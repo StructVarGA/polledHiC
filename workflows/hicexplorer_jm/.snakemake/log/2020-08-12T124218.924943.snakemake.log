@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	14	adjust
+	1	all
+	24	conversion
+	14	correct
+	14	diagnostic
+	14	mergeprotocol
+	14	normalize
+	95
+
+[Wed Aug 12 12:42:20 2020]
+rule conversion:
+    input: /work2/genphyse/dynagen/jmartin/polledHiC/work/trio1.offspring.Maison-plus/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_50000.matrix, /work2/genphyse/dynagen/jmartin/polledHiC/work/trio1.offspring.Maison-plus/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_50000_abs.bed
+    output: hdf5/trio1.offspring/Maison-plus/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_50000.h5
+    jobid: 76
+    wildcards: sample=trio1.offspring, protocol=Maison-plus, run=trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002, resolution=50000
+
+[Wed Aug 12 12:44:19 2020]
+Finished job 76.
+1 of 95 steps (1%) done
+
+[Wed Aug 12 12:44:19 2020]
+rule conversion:
+    input: /work2/genphyse/dynagen/jmartin/polledHiC/work/trio1.father.Maison/hic_results/matrix/raw/trio1.father.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_50000.matrix, /work2/genphyse/dynagen/jmartin/polledHiC/work/trio1.father.Maison/hic_results/matrix/raw/trio1.father.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_50000_abs.bed
+    output: hdf5/trio1.father/Maison/trio1.father.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_50000.h5
+    jobid: 88
+    wildcards: sample=trio1.father, protocol=Maison, run=trio1.father.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002, resolution=50000
+
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

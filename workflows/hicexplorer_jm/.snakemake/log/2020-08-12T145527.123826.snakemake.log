@@ -1,0 +1,3 @@
+WildcardError in line 72 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+No values given for wildcard 'region'.
+  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile", line 72, in <module>

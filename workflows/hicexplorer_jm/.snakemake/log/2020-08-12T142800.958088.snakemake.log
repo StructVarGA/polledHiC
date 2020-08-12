@@ -1,0 +1,2 @@
+SyntaxError in line 114 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+Multiple run or shell keywords in rule adjust. (Snakefile, line 114)

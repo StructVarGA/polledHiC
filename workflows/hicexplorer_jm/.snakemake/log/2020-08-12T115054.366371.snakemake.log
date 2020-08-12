@@ -1,0 +1,7 @@
+Building DAG of jobs...
+InputFunctionException in line 77 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+AttributeError: 'Wildcards' object has no attribute 'sample'
+Wildcards:
+protocol=Maison-minus
+run=trio1.offspring.run1.Maison-minus_TTACAG-CDFVM_L001
+resolution=200000

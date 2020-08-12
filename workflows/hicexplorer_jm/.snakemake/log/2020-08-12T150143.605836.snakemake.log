@@ -1,0 +1,194 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	4	adjust
+	1	all
+	4	correct
+	4	merge
+	4	normalize
+	20	plotMatrix
+	37
+
+[Wed Aug 12 15:01:44 2020]
+rule merge:
+    input: trio1.offspring/Maison-minus/50000/matrix.h5, trio1.offspring/Maison-plus/50000/matrix.h5, trio1.offspring/Arima/50000/matrix.h5, trio1.offspring/Dovetail/50000/matrix.h5, trio1.father/Maison/50000/matrix.h5, trio1.father/Arima/50000/matrix.h5, trio1.father/Dovetail/50000/matrix.h5
+    output: trio1.offspring/merged/50000/matrix.h5
+    jobid: 34
+    wildcards: sample=trio1.offspring, resolution=50000
+
+hicSumMatrices --matrices trio1.offspring/Maison-minus/50000/matrix.h5 trio1.offspring/Maison-plus/50000/matrix.h5 trio1.offspring/Arima/50000/matrix.h5 trio1.offspring/Dovetail/50000/matrix.h5 trio1.father/Maison/50000/matrix.h5 trio1.father/Arima/50000/matrix.h5 trio1.father/Dovetail/50000/matrix.h5 --outFileName trio1.offspring/merged/50000/matrix.h5
+
+[Wed Aug 12 15:01:44 2020]
+rule merge:
+    input: trio1.offspring/Maison-minus/200000/matrix.h5, trio1.offspring/Maison-plus/200000/matrix.h5, trio1.offspring/Arima/200000/matrix.h5, trio1.offspring/Dovetail/200000/matrix.h5, trio1.father/Maison/200000/matrix.h5, trio1.father/Arima/200000/matrix.h5, trio1.father/Dovetail/200000/matrix.h5
+    output: trio1.offspring/merged/200000/matrix.h5
+    jobid: 33
+    wildcards: sample=trio1.offspring, resolution=200000
+
+hicSumMatrices --matrices trio1.offspring/Maison-minus/200000/matrix.h5 trio1.offspring/Maison-plus/200000/matrix.h5 trio1.offspring/Arima/200000/matrix.h5 trio1.offspring/Dovetail/200000/matrix.h5 trio1.father/Maison/200000/matrix.h5 trio1.father/Arima/200000/matrix.h5 trio1.father/Dovetail/200000/matrix.h5 --outFileName trio1.offspring/merged/200000/matrix.h5
+
+[Wed Aug 12 15:01:44 2020]
+rule merge:
+    input: trio1.offspring/Maison-minus/200000/matrix.h5, trio1.offspring/Maison-plus/200000/matrix.h5, trio1.offspring/Arima/200000/matrix.h5, trio1.offspring/Dovetail/200000/matrix.h5, trio1.father/Maison/200000/matrix.h5, trio1.father/Arima/200000/matrix.h5, trio1.father/Dovetail/200000/matrix.h5
+    output: trio1.father/merged/200000/matrix.h5
+    jobid: 35
+    wildcards: sample=trio1.father, resolution=200000
+
+hicSumMatrices --matrices trio1.offspring/Maison-minus/200000/matrix.h5 trio1.offspring/Maison-plus/200000/matrix.h5 trio1.offspring/Arima/200000/matrix.h5 trio1.offspring/Dovetail/200000/matrix.h5 trio1.father/Maison/200000/matrix.h5 trio1.father/Arima/200000/matrix.h5 trio1.father/Dovetail/200000/matrix.h5 --outFileName trio1.father/merged/200000/matrix.h5
+
+[Wed Aug 12 15:01:44 2020]
+rule merge:
+    input: trio1.offspring/Maison-minus/50000/matrix.h5, trio1.offspring/Maison-plus/50000/matrix.h5, trio1.offspring/Arima/50000/matrix.h5, trio1.offspring/Dovetail/50000/matrix.h5, trio1.father/Maison/50000/matrix.h5, trio1.father/Arima/50000/matrix.h5, trio1.father/Dovetail/50000/matrix.h5
+    output: trio1.father/merged/50000/matrix.h5
+    jobid: 36
+    wildcards: sample=trio1.father, resolution=50000
+
+hicSumMatrices --matrices trio1.offspring/Maison-minus/50000/matrix.h5 trio1.offspring/Maison-plus/50000/matrix.h5 trio1.offspring/Arima/50000/matrix.h5 trio1.offspring/Dovetail/50000/matrix.h5 trio1.father/Maison/50000/matrix.h5 trio1.father/Arima/50000/matrix.h5 trio1.father/Dovetail/50000/matrix.h5 --outFileName trio1.father/merged/50000/matrix.h5
+[Wed Aug 12 15:02:14 2020]
+Finished job 33.
+1 of 37 steps (3%) done
+
+[Wed Aug 12 15:02:14 2020]
+rule adjust:
+    input: trio1.offspring/merged/200000/matrix.h5
+    output: trio1.offspring/merged/200000/adjusted.h5
+    jobid: 29
+    wildcards: sample=trio1.offspring, resolution=200000
+
+hicAdjustMatrix --matrix trio1.offspring/merged/200000/matrix.h5 --outFileName trio1.offspring/merged/200000/adjusted.h5  --chromosomes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --action keep ;
+[Wed Aug 12 15:02:14 2020]
+Finished job 35.
+2 of 37 steps (5%) done
+
+[Wed Aug 12 15:02:14 2020]
+rule adjust:
+    input: trio1.father/merged/200000/matrix.h5
+    output: trio1.father/merged/200000/adjusted.h5
+    jobid: 31
+    wildcards: sample=trio1.father, resolution=200000
+
+hicAdjustMatrix --matrix trio1.father/merged/200000/matrix.h5 --outFileName trio1.father/merged/200000/adjusted.h5  --chromosomes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --action keep ;
+[Wed Aug 12 15:02:31 2020]
+Finished job 31.
+3 of 37 steps (8%) done
+
+[Wed Aug 12 15:02:31 2020]
+rule normalize:
+    input: trio1.father/merged/200000/adjusted.h5
+    output: trio1.father/merged/200000/normalized.h5
+    jobid: 27
+    wildcards: sample=trio1.father, resolution=200000
+
+hicNormalize --matrices trio1.father/merged/200000/adjusted.h5 --outFileName trio1.father/merged/200000/normalized.h5 --normalize smallest
+[Wed Aug 12 15:02:31 2020]
+Finished job 29.
+4 of 37 steps (11%) done
+
+[Wed Aug 12 15:02:31 2020]
+rule normalize:
+    input: trio1.offspring/merged/200000/adjusted.h5
+    output: trio1.offspring/merged/200000/normalized.h5
+    jobid: 25
+    wildcards: sample=trio1.offspring, resolution=200000
+
+hicNormalize --matrices trio1.offspring/merged/200000/adjusted.h5 --outFileName trio1.offspring/merged/200000/normalized.h5 --normalize smallest
+[Wed Aug 12 15:02:45 2020]
+Finished job 27.
+5 of 37 steps (14%) done
+
+[Wed Aug 12 15:02:45 2020]
+rule correct:
+    input: trio1.father/merged/200000/normalized.h5
+    output: trio1.father/merged/200000/corrected.h5
+    jobid: 23
+    wildcards: sample=trio1.father, resolution=200000
+
+hicCorrectMatrix correct --matrix trio1.father/merged/200000/normalized.h5 --outFileName trio1.father/merged/200000/corrected.h5
+[Wed Aug 12 15:02:45 2020]
+Finished job 25.
+6 of 37 steps (16%) done
+
+[Wed Aug 12 15:02:45 2020]
+rule correct:
+    input: trio1.offspring/merged/200000/normalized.h5
+    output: trio1.offspring/merged/200000/corrected.h5
+    jobid: 21
+    wildcards: sample=trio1.offspring, resolution=200000
+
+hicCorrectMatrix correct --matrix trio1.offspring/merged/200000/normalized.h5 --outFileName trio1.offspring/merged/200000/corrected.h5
+[Wed Aug 12 15:02:54 2020]
+Finished job 36.
+7 of 37 steps (19%) done
+
+[Wed Aug 12 15:02:54 2020]
+rule adjust:
+    input: trio1.father/merged/50000/matrix.h5
+    output: trio1.father/merged/50000/adjusted.h5
+    jobid: 32
+    wildcards: sample=trio1.father, resolution=50000
+
+hicAdjustMatrix --matrix trio1.father/merged/50000/matrix.h5 --outFileName trio1.father/merged/50000/adjusted.h5  --chromosomes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --action keep ;
+[Wed Aug 12 15:02:54 2020]
+Finished job 34.
+8 of 37 steps (22%) done
+
+[Wed Aug 12 15:02:54 2020]
+rule adjust:
+    input: trio1.offspring/merged/50000/matrix.h5
+    output: trio1.offspring/merged/50000/adjusted.h5
+    jobid: 30
+    wildcards: sample=trio1.offspring, resolution=50000
+
+hicAdjustMatrix --matrix trio1.offspring/merged/50000/matrix.h5 --outFileName trio1.offspring/merged/50000/adjusted.h5  --chromosomes 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 X --action keep ;
+[Wed Aug 12 15:03:30 2020]
+Finished job 21.
+9 of 37 steps (24%) done
+
+[Wed Aug 12 15:03:30 2020]
+rule plotMatrix:
+    input: trio1.offspring/merged/200000/corrected.h5
+    output: trio1.offspring/merged/200000/1:1000000-6000000_plot.png
+    jobid: 2
+    wildcards: sample=trio1.offspring, resolution=200000, regions=1:1000000-6000000
+
+hicPlotMatrix --matrix trio1.offspring/merged/200000/corrected.h5 --output trio1.offspring/merged/200000/1:1000000-6000000_plot.png --region 1:1-158534110 1:1000000-6000000 1:1500000-3500000 1:2000000-3000000 1:2200000-2800000
+[Wed Aug 12 15:03:30 2020]
+Finished job 23.
+10 of 37 steps (27%) done
+
+[Wed Aug 12 15:03:30 2020]
+rule plotMatrix:
+    input: trio1.offspring/merged/200000/corrected.h5
+    output: trio1.offspring/merged/200000/1:1-158534110_plot.png
+    jobid: 1
+    wildcards: sample=trio1.offspring, resolution=200000, regions=1:1-158534110
+
+hicPlotMatrix --matrix trio1.offspring/merged/200000/corrected.h5 --output trio1.offspring/merged/200000/1:1-158534110_plot.png --region 1:1-158534110 1:1000000-6000000 1:1500000-3500000 1:2000000-3000000 1:2200000-2800000
+[Wed Aug 12 15:03:34 2020]
+Error in rule plotMatrix:
+    jobid: 2
+    output: trio1.offspring/merged/200000/1:1000000-6000000_plot.png
+    shell:
+        hicPlotMatrix --matrix trio1.offspring/merged/200000/corrected.h5 --output trio1.offspring/merged/200000/1:1000000-6000000_plot.png --region 1:1-158534110 1:1000000-6000000 1:1500000-3500000 1:2000000-3000000 1:2200000-2800000
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+[Wed Aug 12 15:03:34 2020]
+Error in rule plotMatrix:
+    jobid: 1
+    output: trio1.offspring/merged/200000/1:1-158534110_plot.png
+    shell:
+        hicPlotMatrix --matrix trio1.offspring/merged/200000/corrected.h5 --output trio1.offspring/merged/200000/1:1-158534110_plot.png --region 1:1-158534110 1:1000000-6000000 1:1500000-3500000 1:2000000-3000000 1:2200000-2800000
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+[Wed Aug 12 15:03:39 2020]
+Finished job 30.
+11 of 37 steps (30%) done
+[Wed Aug 12 15:03:40 2020]
+Finished job 32.
+12 of 37 steps (32%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/.snakemake/log/2020-08-12T150143.605836.snakemake.log

@@ -1,0 +1,7 @@
+Building DAG of jobs...
+InputFunctionException in line 85 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+NameError: name 'protocols' is not defined
+Wildcards:
+sample=trio1.offspring
+protocol=Maison-minus
+resolution=200000

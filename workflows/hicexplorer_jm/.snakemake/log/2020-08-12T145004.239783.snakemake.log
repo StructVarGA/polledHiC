@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in line 72 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+Missing input files for rule all:
+trio1.offspring/merged/50000/corrected_diagnostic.png
+trio1.father/merged/200000/corrected_diagnostic.png
+trio1.father/merged/50000/corrected_diagnostic.png
+trio1.offspring/merged/200000/corrected_diagnostic.png
