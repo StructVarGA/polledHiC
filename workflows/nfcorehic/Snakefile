@@ -33,6 +33,7 @@ nfcore_hic_config = os.path.realpath("nfcore-hic.config")
 
 workdir: config['sample']
 
+localrules: nfconfig
 
 rule all:
     input:
@@ -67,6 +68,8 @@ rule nfcorehic:
         cd {params.outdir}
         module purge
         module load bioinfo/nfcore-Nextflow-v19.04.0
+        echo "Sleeping...."
+        sleep $[ ($RANDOM % 20) + 1]
         nextflow run nf-core/hic \
           -revision 1.1.0 \
           -profile genotoul \
