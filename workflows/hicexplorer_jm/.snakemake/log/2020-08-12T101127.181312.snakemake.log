@@ -1,3 +1,0 @@
-WildcardError in line 74 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-No values given for wildcard 'resolution'.
-  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile", line 74, in <module>

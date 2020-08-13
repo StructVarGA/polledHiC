@@ -1,3 +1,0 @@
-NameError in line 95 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-name 'protocols' is not defined
-  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile", line 95, in <module>

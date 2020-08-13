@@ -1,3 +1,0 @@
-TypeError in line 144 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-shellcmd() got an unexpected keyword argument 'region'
-  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile", line 144, in <module>

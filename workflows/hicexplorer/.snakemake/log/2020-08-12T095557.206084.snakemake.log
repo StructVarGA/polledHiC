@@ -1,5 +1,0 @@
-TypeError in line 60 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer/Snakefile:
-expected str, bytes or os.PathLike object, not list
-  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer/Snakefile", line 60, in <module>
-  File "/tools/python/3.6.3/lib/python3.6/os.py", line 205, in makedirs
-  File "/tools/python/3.6.3/lib/python3.6/posixpath.py", line 105, in split

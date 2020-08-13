@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 85 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-Missing input files for rule mergeprotocol:
-hdf5/Maison-minus/trio1.offspring.run1.Maison-minus_TTACAG-CDFVM_L001_200000.h5

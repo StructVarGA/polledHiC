@@ -13,4 +13,4 @@ notebooks/.ipynb_checkpoints/*
 ## Ignore 
 workflows/hicexplorer_jm/HiCExplorer-pipeline/*
 workflows/hicexplorer/trio1.offspring/*
-workflows/hicexplorer_jm/.snakemake/*
+#*/.snakemake/

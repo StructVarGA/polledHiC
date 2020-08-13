@@ -64,14 +64,14 @@ protocols_and_merged = list(set(sampled_protocols['protocol'])) + ['Merged']
 
 workdir: config['workdir']
 
-sample = config['sample']
+samples = config['samples']
 
 wildcard_constraints:
 	protocol="|".join(protocols_and_merged),
 
 rule all:
         input:
-            expand("{unit.sample}/merged/{resolution}/{region}_plot.png", unit=sampled_protocols.itertuples(), resolution=resolutions, region=regions),
+            expand("{sample}/merged/{resolution}/{region}_plot.png", sample=samples, resolution=resolutions, region=regions),
 
 rule conversion:
     input:
@@ -93,7 +93,8 @@ rule mergeprotocol:
 
 rule merge:
     input:
-        expand("{unit.sample}/{unit.protocol}/{{resolution}}/matrix.h5", unit=sampled_protocols.itertuples())
+        # expand("{{sample}}/{protocol}/{{resolution}}/matrix.h5", sampled_protocols.loc[[wildcards.sample]]['protocol'])
+        expand("{{sample}}/{protocol}/{{resolution}}/matrix.h5", sampled_protocols.loc['samples', 'protocol'])
     output:
         "{sample}/merged/{resolution}/matrix.h5"
     shell:
@@ -141,4 +142,4 @@ rule plotMatrix:
     output:
         "{sample}/merged/{resolution}/{region}_plot.png"
     shell:
-        "hicPlotMatrix --matrix {input} --outFileName {output} --region {region} --log"
+        "hicPlotMatrix --matrix {input} --outFileName {output} --region {wildcards.region} --log"

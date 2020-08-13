@@ -1,4 +1,0 @@
-KeyError in line 55 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer/Snakefile:
-"None of ['protocol'] are in the columns"
-  File "/work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer/Snakefile", line 55, in <module>
-  File "/home/jmartin/.conda/envs/hicexplorer-3.5/lib/python3.7/site-packages/pandas/core/frame.py", line 4545, in set_index

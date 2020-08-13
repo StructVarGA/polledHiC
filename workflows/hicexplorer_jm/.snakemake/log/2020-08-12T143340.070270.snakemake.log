@@ -1,2 +1,0 @@
-SyntaxError in line 74 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-Unexpected keyword expand in rule definition (Snakefile, line 74)
