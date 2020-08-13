@@ -49,6 +49,15 @@ def get_matrices(wildcards):
         matrices.append(m_path)
     return matrices
 
+def get_merged_matrices(wildcards):
+
+    matrices = []
+    for prot in sampled_protocols['protocol']:
+        if prot in sampled_protocols.loc[wildcards.sample]['protocol']:
+            m_path = os.path.join("hdf5", wildcards.sample, prot, wildcards.resolution, "matrix.h5")
+            matrices.append(m_path)
+    return matrices
+
 
 configfile: "config.yaml"
 
@@ -67,11 +76,11 @@ workdir: config['workdir']
 samples = config['samples']
 
 wildcard_constraints:
-	protocol="|".join(protocols_and_merged),
+    protocol="|".join(protocols_and_merged)
 
 rule all:
         input:
-            expand("{sample}/merged/{resolution}/{region}_plot.png", sample=samples, resolution=resolutions, region=regions),
+            expand("plots/{sample}/merged/{resolution}/{region}_plot.png", sample=samples, protocol=protocols_and_merged, resolution=resolutions, region=regions),
 
 rule conversion:
     input:
@@ -87,24 +96,25 @@ rule mergeprotocol:
     input:
         get_matrices
     output:
-        "{sample}/{protocol}/{resolution}/matrix.h5"
+        "hdf5/{sample}/{protocol}/{resolution}/matrix.h5"
     shell:
         "hicSumMatrices --matrices  {input} --outFileName {output}"
 
 rule merge:
     input:
         # expand("{{sample}}/{protocol}/{{resolution}}/matrix.h5", sampled_protocols.loc[[wildcards.sample]]['protocol'])
-        expand("{{sample}}/{protocol}/{{resolution}}/matrix.h5", sampled_protocols.loc['samples', 'protocol'])
+        # expand("hdf5/{{sample}}/{unit.protocol}/{{resolution}}/matrix.h5", unit=sampled_protocols.itertuples())
+        get_merged_matrices
     output:
-        "{sample}/merged/{resolution}/matrix.h5"
+        "hdf5/{sample}/merged/{resolution}/matrix.h5"
     shell:
         "hicSumMatrices --matrices {input} --outFileName {output}"
 
 rule adjust:
     input:
-        "{sample}/merged/{resolution}/matrix.h5",
+        "hdf5/{sample}/merged/{resolution}/matrix.h5",
     output:
-        "{sample}/merged/{resolution}/adjusted.h5"
+        "hdf5/{sample}/merged/{resolution}/adjusted.h5"
     params:
         chromosomes = chromosomes
     shell:
@@ -113,33 +123,33 @@ rule adjust:
 
 rule normalize:
     input:
-        "{sample}/merged/{resolution}/adjusted.h5"
+        "hdf5/{sample}/merged/{resolution}/adjusted.h5"
     output:
-        "{sample}/merged/{resolution}/normalized.h5"
+        "hdf5/{sample}/merged/{resolution}/normalized.h5"
     shell:
         "hicNormalize --matrices {input} --outFileName {output}"
         " --normalize smallest"
 
 rule correct:
     input:
-        "{sample}/merged/{resolution}/normalized.h5"
+        "hdf5/{sample}/merged/{resolution}/normalized.h5"
     output:
-        "{sample}/merged/{resolution}/corrected.h5"
+        "hdf5/{sample}/merged/{resolution}/corrected.h5"
     shell:
         "hicCorrectMatrix correct --matrix {input} --outFileName {output}"
 
 rule diagnostic:
     input:
-        "{sample}/merged/{resolution}/{type}.h5"
+        "hdf5/{sample}/merged/{resolution}/{type}.h5"
     output:
-        "{sample}/merged/{resolution}/{type}_diagnostic.png"
+        "hdf5/{sample}/merged/{resolution}/{type}_diagnostic.png"
     shell:
         "hicCorrectMatrix diagnostic_plot -m {input} -o {output}"
 
 rule plotMatrix:
     input:
-        "{sample}/merged/{resolution}/corrected.h5"
+        "hdf5/{sample}/merged/{resolution}/corrected.h5"
     output:
-        "{sample}/merged/{resolution}/{region}_plot.png"
+        "plots/{sample}/merged/{resolution}/{region}_plot.png"
     shell:
         "hicPlotMatrix --matrix {input} --outFileName {output} --region {wildcards.region} --log"

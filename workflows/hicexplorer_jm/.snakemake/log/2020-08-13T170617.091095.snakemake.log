@@ -1,0 +1,187 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	14	plotMatrix
+	15
+
+[Thu Aug 13 17:06:18 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/50000/corrected.h5
+    output: plots/trio1.offspring/merged/50000/1:1500000-3500000_plot.png
+    jobid: 8
+    wildcards: sample=trio1.offspring, resolution=50000, region=1:1500000-3500000
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/50000/corrected.h5 --outFileName plots/trio1.offspring/merged/50000/1:1500000-3500000_plot.png --region 1:1500000-3500000 --log
+
+[Thu Aug 13 17:06:18 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/50000/corrected.h5
+    output: plots/trio1.father/merged/50000/1:1-158534110_plot.png
+    jobid: 16
+    wildcards: sample=trio1.father, resolution=50000, region=1:1-158534110
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/50000/corrected.h5 --outFileName plots/trio1.father/merged/50000/1:1-158534110_plot.png --region 1:1-158534110 --log
+
+[Thu Aug 13 17:06:18 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/50000/corrected.h5
+    output: plots/trio1.offspring/merged/50000/1:2000000-3000000_plot.png
+    jobid: 9
+    wildcards: sample=trio1.offspring, resolution=50000, region=1:2000000-3000000
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/50000/corrected.h5 --outFileName plots/trio1.offspring/merged/50000/1:2000000-3000000_plot.png --region 1:2000000-3000000 --log
+
+[Thu Aug 13 17:06:18 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/50000/corrected.h5
+    output: plots/trio1.offspring/merged/50000/1:1-158534110_plot.png
+    jobid: 6
+    wildcards: sample=trio1.offspring, resolution=50000, region=1:1-158534110
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/50000/corrected.h5 --outFileName plots/trio1.offspring/merged/50000/1:1-158534110_plot.png --region 1:1-158534110 --log
+[Thu Aug 13 17:06:38 2020]
+Finished job 8.
+1 of 15 steps (7%) done
+
+[Thu Aug 13 17:06:38 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/50000/corrected.h5
+    output: plots/trio1.father/merged/50000/1:1500000-3500000_plot.png
+    jobid: 18
+    wildcards: sample=trio1.father, resolution=50000, region=1:1500000-3500000
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/50000/corrected.h5 --outFileName plots/trio1.father/merged/50000/1:1500000-3500000_plot.png --region 1:1500000-3500000 --log
+[Thu Aug 13 17:06:38 2020]
+Finished job 9.
+2 of 15 steps (13%) done
+
+[Thu Aug 13 17:06:38 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/50000/corrected.h5
+    output: plots/trio1.father/merged/50000/1:2200000-2800000_plot.png
+    jobid: 20
+    wildcards: sample=trio1.father, resolution=50000, region=1:2200000-2800000
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/50000/corrected.h5 --outFileName plots/trio1.father/merged/50000/1:2200000-2800000_plot.png --region 1:2200000-2800000 --log
+[Thu Aug 13 17:06:41 2020]
+Finished job 16.
+3 of 15 steps (20%) done
+
+[Thu Aug 13 17:06:41 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/200000/corrected.h5
+    output: plots/trio1.offspring/merged/200000/1:2200000-2800000_plot.png
+    jobid: 5
+    wildcards: sample=trio1.offspring, resolution=200000, region=1:2200000-2800000
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/200000/corrected.h5 --outFileName plots/trio1.offspring/merged/200000/1:2200000-2800000_plot.png --region 1:2200000-2800000 --log
+[Thu Aug 13 17:06:47 2020]
+Finished job 6.
+4 of 15 steps (27%) done
+
+[Thu Aug 13 17:06:47 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/200000/corrected.h5
+    output: plots/trio1.offspring/merged/200000/1:2000000-3000000_plot.png
+    jobid: 4
+    wildcards: sample=trio1.offspring, resolution=200000, region=1:2000000-3000000
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/200000/corrected.h5 --outFileName plots/trio1.offspring/merged/200000/1:2000000-3000000_plot.png --region 1:2000000-3000000 --log
+[Thu Aug 13 17:06:50 2020]
+Finished job 20.
+5 of 15 steps (33%) done
+
+[Thu Aug 13 17:06:50 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/200000/corrected.h5
+    output: plots/trio1.offspring/merged/200000/1:1000000-6000000_plot.png
+    jobid: 2
+    wildcards: sample=trio1.offspring, resolution=200000, region=1:1000000-6000000
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/200000/corrected.h5 --outFileName plots/trio1.offspring/merged/200000/1:1000000-6000000_plot.png --region 1:1000000-6000000 --log
+[Thu Aug 13 17:06:50 2020]
+Finished job 5.
+6 of 15 steps (40%) done
+
+[Thu Aug 13 17:06:50 2020]
+rule plotMatrix:
+    input: hdf5/trio1.offspring/merged/200000/corrected.h5
+    output: plots/trio1.offspring/merged/200000/1:1-158534110_plot.png
+    jobid: 1
+    wildcards: sample=trio1.offspring, resolution=200000, region=1:1-158534110
+
+hicPlotMatrix --matrix hdf5/trio1.offspring/merged/200000/corrected.h5 --outFileName plots/trio1.offspring/merged/200000/1:1-158534110_plot.png --region 1:1-158534110 --log
+[Thu Aug 13 17:06:50 2020]
+Finished job 18.
+7 of 15 steps (47%) done
+
+[Thu Aug 13 17:06:50 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/200000/corrected.h5
+    output: plots/trio1.father/merged/200000/1:1-158534110_plot.png
+    jobid: 11
+    wildcards: sample=trio1.father, resolution=200000, region=1:1-158534110
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/200000/corrected.h5 --outFileName plots/trio1.father/merged/200000/1:1-158534110_plot.png --region 1:1-158534110 --log
+[Thu Aug 13 17:06:56 2020]
+Finished job 4.
+8 of 15 steps (53%) done
+
+[Thu Aug 13 17:06:56 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/200000/corrected.h5
+    output: plots/trio1.father/merged/200000/1:2200000-2800000_plot.png
+    jobid: 15
+    wildcards: sample=trio1.father, resolution=200000, region=1:2200000-2800000
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/200000/corrected.h5 --outFileName plots/trio1.father/merged/200000/1:2200000-2800000_plot.png --region 1:2200000-2800000 --log
+[Thu Aug 13 17:06:58 2020]
+Finished job 11.
+9 of 15 steps (60%) done
+
+[Thu Aug 13 17:06:58 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/200000/corrected.h5
+    output: plots/trio1.father/merged/200000/1:1000000-6000000_plot.png
+    jobid: 12
+    wildcards: sample=trio1.father, resolution=200000, region=1:1000000-6000000
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/200000/corrected.h5 --outFileName plots/trio1.father/merged/200000/1:1000000-6000000_plot.png --region 1:1000000-6000000 --log
+[Thu Aug 13 17:06:59 2020]
+Finished job 2.
+10 of 15 steps (67%) done
+
+[Thu Aug 13 17:06:59 2020]
+rule plotMatrix:
+    input: hdf5/trio1.father/merged/200000/corrected.h5
+    output: plots/trio1.father/merged/200000/1:1500000-3500000_plot.png
+    jobid: 13
+    wildcards: sample=trio1.father, resolution=200000, region=1:1500000-3500000
+
+hicPlotMatrix --matrix hdf5/trio1.father/merged/200000/corrected.h5 --outFileName plots/trio1.father/merged/200000/1:1500000-3500000_plot.png --region 1:1500000-3500000 --log
+[Thu Aug 13 17:07:00 2020]
+Finished job 1.
+11 of 15 steps (73%) done
+[Thu Aug 13 17:07:02 2020]
+Finished job 15.
+12 of 15 steps (80%) done
+[Thu Aug 13 17:07:05 2020]
+Finished job 12.
+13 of 15 steps (87%) done
+[Thu Aug 13 17:07:06 2020]
+Finished job 13.
+14 of 15 steps (93%) done
+
+[Thu Aug 13 17:07:06 2020]
+localrule all:
+    input: plots/trio1.offspring/merged/200000/1:1-158534110_plot.png, plots/trio1.offspring/merged/200000/1:1000000-6000000_plot.png, plots/trio1.offspring/merged/200000/1:1500000-3500000_plot.png, plots/trio1.offspring/merged/200000/1:2000000-3000000_plot.png, plots/trio1.offspring/merged/200000/1:2200000-2800000_plot.png, plots/trio1.offspring/merged/50000/1:1-158534110_plot.png, plots/trio1.offspring/merged/50000/1:1000000-6000000_plot.png, plots/trio1.offspring/merged/50000/1:1500000-3500000_plot.png, plots/trio1.offspring/merged/50000/1:2000000-3000000_plot.png, plots/trio1.offspring/merged/50000/1:2200000-2800000_plot.png, plots/trio1.father/merged/200000/1:1-158534110_plot.png, plots/trio1.father/merged/200000/1:1000000-6000000_plot.png, plots/trio1.father/merged/200000/1:1500000-3500000_plot.png, plots/trio1.father/merged/200000/1:2000000-3000000_plot.png, plots/trio1.father/merged/200000/1:2200000-2800000_plot.png, plots/trio1.father/merged/50000/1:1-158534110_plot.png, plots/trio1.father/merged/50000/1:1000000-6000000_plot.png, plots/trio1.father/merged/50000/1:1500000-3500000_plot.png, plots/trio1.father/merged/50000/1:2000000-3000000_plot.png, plots/trio1.father/merged/50000/1:2200000-2800000_plot.png
+    jobid: 0
+
+[Thu Aug 13 17:07:06 2020]
+Finished job 0.
+15 of 15 steps (100%) done
+Complete log: /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/.snakemake/log/2020-08-13T170617.091095.snakemake.log
