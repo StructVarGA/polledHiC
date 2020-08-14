@@ -50,7 +50,9 @@ def get_matrices(wildcards):
     return matrices
 
 def get_merged_matrices(wildcards):
-
+    """ input function for rule merged
+        return list of the merged h5 matrices from rule mergeprotocol from a association individual-resolution
+    """
     matrices = []
     for prot in sampled_protocols['protocol']:
         if prot in sampled_protocols.loc[wildcards.sample]['protocol']:
@@ -102,7 +104,6 @@ rule mergeprotocol:
 
 rule merge:
     input:
-        # expand("{{sample}}/{protocol}/{{resolution}}/matrix.h5", sampled_protocols.loc[[wildcards.sample]]['protocol'])
         # expand("hdf5/{{sample}}/{unit.protocol}/{{resolution}}/matrix.h5", unit=sampled_protocols.itertuples())
         get_merged_matrices
     output:
