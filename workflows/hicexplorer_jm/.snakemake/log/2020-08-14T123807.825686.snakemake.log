@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 159 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+Missing input files for rule findTads:
+hdf5/trio1.offspring/merged/200000/correted.h5
