@@ -154,7 +154,7 @@ rule plotMatrix:
     output:
         "plots/{sample}/merged/{resolution}/{region}_plot.png"
     shell:
-        "hicPlotMatrix --matrix {input} --outFileName {output} --region {wildcards.region} --log"
+        "hicPlotMatrix --matrix {input} --outFileName {output} --region 1:{wildcards.region} --log"
 
 rule findTADs:
     input:
