@@ -1,0 +1,6 @@
+Building DAG of jobs...
+File path /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw//trio1.offspring.run1.Dovetail_GCCAAT-CDFVM_L001_200000.matrix contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+File path /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw//trio1.offspring.run2.Dovetail_GCCAAT-AH5HWKBBXY_L001_200000.matrix contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+MissingInputException in line 90 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
+Missing input files for rule conversion:
+/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw/trio1.offspring/trio1.offspring.run1.Dovetail_GCCAAT-CDFVM_L001_200000_abs.bed
