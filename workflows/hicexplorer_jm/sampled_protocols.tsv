@@ -1,4 +1,4 @@
-sample	protocol	matrixdir
-trio1.father	Dovetail	/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw
-trio1.mother	Dovetail	/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw
-trio1.offspring	Dovetail	/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw
+sample	protocol	matrixprefix
+trio1.father	Dovetail	/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw/trio1.father
+trio1.mother	Dovetail	/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw/trio1.mother
+trio1.offspring	Dovetail	/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw/trio1.offspring

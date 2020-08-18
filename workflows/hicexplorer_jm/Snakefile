@@ -3,38 +3,40 @@ import os
 import glob
 import re
 import pandas as pd
-
+from pprint import pprint as pp
 
 # Function definition
-def set_run_names(protocols):
+def set_run_names(sampled_protocols):
     ''' For each protocol retrieve the associated run names '''
     runs = []
-    for protocol in protocols.index:
-        matrix_dir = protocols.loc[protocol]['matrixdir']
+    for protocol in sampled_protocols.index:
+        matrix_pref = sampled_protocols.loc[protocol]['matrixprefix']
         prot_runs = []
-        for f in glob.glob(matrix_dir+'/*.matrix'):
+        for f in glob.glob(matrix_pref+'*.matrix'):
             prot_runs.append(re.sub('_\d+.matrix', '', os.path.basename(f),))
         runs.append(",".join(set(prot_runs)))
-    protocols['runs'] = runs
-    return protocols
+    sampled_protocols['runs'] = runs
+    print("runs = ")
+    pp(runs)
+    return sampled_protocols
 
 
 def get_raw_matrix(wildcards):
     """ input function for rule conversion
         returns the hicpro raw matrix associated to a protocol-run-resolution
     """
-    mdir = sampled_protocols.loc[(wildcards.sample, wildcards.protocol)]['matrixdir']
+    mdir = sampled_protocols.loc[(wildcards.sample, wildcards.protocol)]['matrixprefix'].split('trio')[0]
     matrix_file = wildcards.run + "_" + wildcards.resolution + ".matrix"
-    return mdir + "/" + matrix_file
+    return mdir + matrix_file
 
 
 def get_bed_file(wildcards):
     """ input function for rule conversion
         returns the hicpro bed file associated to a protocol-run-resolution
     """
-    mdir = sampled_protocols.loc[(wildcards.sample, wildcards.protocol)]['matrixdir']
+    mdir = sampled_protocols.loc[(wildcards.sample, wildcards.protocol)]['matrixprefix'].split('trio')[0]
     bed_file = wildcards.run + "_" + wildcards.resolution + "_abs.bed"
-    return mdir + "/" + bed_file
+    return mdir + bed_file
 
 
 def get_matrices(wildcards):
