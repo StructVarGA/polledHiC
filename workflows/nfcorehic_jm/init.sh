@@ -32,9 +32,9 @@ do
             echo "run Dovetail : $run
             res : $restriction
             lig : $ligation";;
-    *Maison*) restriction='A^AGCTT'
+    *Maison) restriction='A^AGCTT'
             ligation='AAGCTAGCTT'
-            echo "run Maison-* : $run
+            echo "run Maison : $run
             res : $restriction
             lig : $ligation";;
   esac
@@ -86,6 +86,5 @@ nextflow run nf-core/hic \
  --ice_filer_high_count_perc 0 \
  --ice_eps     0.1 \
  --skipIce\
- --skipCool
- --clean -f -k' > $script
+ --skipCool' > $script
 done 
