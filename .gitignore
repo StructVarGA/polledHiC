@@ -13,7 +13,7 @@ notebooks/.ipynb_checkpoints/*
 ## Ignore 
 workflows/hicexplorer_jm/HiCExplorer-pipeline/*
 workflows/hicexplorer/trio1.offspring/*
-*/.snakemake/
+*/.snakemake
 workflows/nfcorehic_jm/Arima
 workflows/nfcorehic_jm/Dovetail
 workflows/nfcorehic_jm/Maison
