@@ -1,0 +1,58 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	24	adjust
+	1	all
+	80	conversion
+	24	correct
+	24	findTADs
+	24	merge
+	44	mergeprotocol
+	24	normalize
+	120	plotMatrix
+	365
+
+[Wed Aug 19 11:06:09 2020]
+rule conversion:
+    input: /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_10000.matrix, /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_10000_abs.bed
+    output: hdf5/trio1.offspring/Maison/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_10000.h5
+    jobid: 314
+    wildcards: sample=trio1.offspring, protocol=Maison, run=trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002, resolution=10000
+
+hicConvertFormat --matrices /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_10000.matrix --bedFileHicpro /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_10000_abs.bed --outFileName hdf5/trio1.offspring/Maison/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_10000.h5 --outputFormat h5 --inputFormat hicpro
+
+[Wed Aug 19 11:06:09 2020]
+rule conversion:
+    input: /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_25000.matrix, /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_25000_abs.bed
+    output: hdf5/trio1.offspring/Maison/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_25000.h5
+    jobid: 306
+    wildcards: sample=trio1.offspring, protocol=Maison, run=trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002, resolution=25000
+
+hicConvertFormat --matrices /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_25000.matrix --bedFileHicpro /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_25000_abs.bed --outFileName hdf5/trio1.offspring/Maison/trio1.offspring.run3.Maison-plus_GACGTCTT-GGTTCACC-AHGK7YDRXX_L002_25000.h5 --outputFormat h5 --inputFormat hicpro
+[Wed Aug 19 11:10:27 2020]
+Finished job 306.
+1 of 365 steps (0.27%) done
+
+[Wed Aug 19 11:10:27 2020]
+rule conversion:
+    input: /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_10000.matrix, /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_10000_abs.bed
+    output: hdf5/trio1.mother/Maison/trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_10000.h5
+    jobid: 340
+    wildcards: sample=trio1.mother, protocol=Maison, run=trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002, resolution=10000
+
+hicConvertFormat --matrices /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_10000.matrix --bedFileHicpro /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_10000_abs.bed --outFileName hdf5/trio1.mother/Maison/trio1.mother.run1.Maison_GACCTGAA-TTGGTGAG-AHGK7YDRXX_L002_10000.h5 --outputFormat h5 --inputFormat hicpro
+[Wed Aug 19 11:11:01 2020]
+Finished job 314.
+2 of 365 steps (0.55%) done
+
+[Wed Aug 19 11:11:01 2020]
+rule conversion:
+    input: /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001_10000.matrix, /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001_10000_abs.bed
+    output: hdf5/trio2.offspring/Maison/trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001_10000.h5
+    jobid: 347
+    wildcards: sample=trio2.offspring, protocol=Maison, run=trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001, resolution=10000
+
+hicConvertFormat --matrices /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001_10000.matrix --bedFileHicpro /work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Maison/hic_results/matrix/raw/trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001_10000_abs.bed --outFileName hdf5/trio2.offspring/Maison/trio2.offspring.run1.Maison_GACCTGAA-TTGGTGAG-BHHNMLDRXX_L001_10000.h5 --outputFormat h5 --inputFormat hicpro

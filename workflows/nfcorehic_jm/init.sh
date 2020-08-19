@@ -62,8 +62,7 @@ nextflow run nf-core/hic \
  -revision    1.1.0 \
  -profile     genotoul \
  -name      '$runid' \
- -c '"'"'/home/sfoissac/work/.nextflow/mount.conf'"'"' \
- -c '"'"'/work2/genphyse/dynagen/jmartin/polledHiC/work/bt2_end2end.config'"'"' \
+ -c '"'"'/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/nfcore-hic.config'"'"' \
  --fasta      '$genome' \
  --bwt2_index '$genome' \
  --outdir     '$outdir' \
