@@ -1,8 +1,0 @@
-Building DAG of jobs...
-InputFunctionException in line 90 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-KeyError: 'matrixdir'
-Wildcards:
-sample=trio1.offspring
-protocol=Dovetail
-run=trio1.offspring.run1.Dovetail_GCCAAT-CDFVM_L001
-resolution=200000

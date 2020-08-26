@@ -15,6 +15,8 @@ workflows/hicexplorer_jm/HiCExplorer-pipeline/*
 workflows/hicexplorer/trio1.offspring/*
 workflows/hicexplorer_jm/.snakemake/*
 workflows/hicexplorer_jm/hdf5/*
+workflows/hicexplorer_jm/plots/*
+workflows/hicexplorer_jm/TADs/*
 workflows/nfcorehic_jm/Arima
 workflows/nfcorehic_jm/Dovetail
 workflows/nfcorehic_jm/Maison

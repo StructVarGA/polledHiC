@@ -3,7 +3,6 @@ import os
 import glob
 import re
 import pandas as pd
-from pprint import pprint as pp
 
 # Function definition
 def set_run_names(sampled_protocols):
@@ -16,8 +15,6 @@ def set_run_names(sampled_protocols):
             prot_runs.append(re.sub('_\d+.matrix', '', os.path.basename(f),))
         runs.append(",".join(set(prot_runs)))
     sampled_protocols['runs'] = runs
-    print("runs = ")
-    pp(runs)
     return sampled_protocols
 
 
@@ -59,7 +56,8 @@ def get_samples_matrices(wildcards):
     for prot in sampled_protocols['protocol']:
         if prot in sampled_protocols.loc[wildcards.sample]['protocol']:
             m_path = os.path.join("hdf5", wildcards.sample, prot, wildcards.resolution, "matrix.h5")
-            matrices.append(m_path)
+            if m_path not in matrices:
+                matrices.append(m_path)
     return matrices
 
 
@@ -75,9 +73,9 @@ regions = config['regions']
 
 protocols_and_merged = list(set(sampled_protocols['protocol'])) + ['Merged']
 
-workdir: config['workdir']
-
 samples = config['samples']
+
+# workdir: config['workdir']
 
 wildcard_constraints:
     protocol="|".join(protocols_and_merged)
@@ -85,7 +83,8 @@ wildcard_constraints:
 rule all:
         input:
             expand("plots/{sample}/merged/{resolution}/{region}_plot.png", sample=samples, protocol=protocols_and_merged, resolution=resolutions, region=regions),
-            expand("TADs/{sample}/{resolution}/Done", sample=samples, resolution=resolutions)
+            expand("TADs/{sample}/{resolution}/Done", sample=samples, resolution=resolutions),
+            expand("TADs/plots/TADs_{sample}_{resolution}_{region}.png", sample=samples, resolution=resolutions, region=regions)
 
 rule conversion:
     input:
@@ -162,10 +161,64 @@ rule findTADs:
     input:
         "hdf5/{sample}/merged/{resolution}/corrected.h5"
     output:
+        "TADs/{sample}/{resolution}/Done"
+    params:
         chr1_prefix = "TADs/{sample}/{resolution}/TADs_chr1",
         genomic_prefix = "TADs/{sample}/{resolution}/TADs_genomes",
-        done = "TADs/{sample}/{resolution}/Done"
     shell:
-        "hicFindTADs --matrix {input} --outPrefix {output.chr1_prefix} --correctForMultipleTesting fdr --chromosomes 1 ; \
-         hicFindTADs --matrix {input} --outPrefix {output.genomic_prefix} --correctForMultipleTesting fdr --chromosomes {chromosomes} ; \
-         touch {output.done}"
+        "hicFindTADs --matrix {input} --outPrefix {params.chr1_prefix} --correctForMultipleTesting fdr --chromosomes 1 ; \
+         hicFindTADs --matrix {input} --outPrefix {params.genomic_prefix} --correctForMultipleTesting fdr --chromosomes {chromosomes} ; \
+         touch {output}"
+         
+rule tracksINI:
+    input:
+        matrix = expand("hdf5/{{sample}}/merged/{{resolution}}/corrected.h5"),
+        domains = expand("TADs/{{sample}}/{{resolution}}/TADs_chr1_domains.bed"),
+        score = expand("TADs/{{sample}}/{{resolution}}/TADs_chr1_score.bedgraph")
+    params:
+        title = "{sample}_{resolution}"
+    output:
+        "TADs/tracks/{sample}_{resolution}.ini"
+    shell: 
+        "printf '[x-axis] \n \
+fontsize=10 \n \
+\n \
+[hic matrix] \n \
+file = {input.matrix} \n \
+title = {params.title} \n \
+# depth is the maximum distance plotted in bp. In Hi-C tracks \n \
+# the height of the track is calculated based on the depth such \n \
+# that the matrix does not look deformed \n \
+colormap = Spectral_r \n \
+depth = 1000000 \n \
+transform = log1p \n \
+file_type = hic_matrix \n \
+\n \
+[tads] \n \
+file = {input.domains} \n \
+file_type = domains \n \
+border_color = black \n \
+color = none \n \
+# the tads are overlay over the hic-matrix \n \
+# the share-y options sets the y-axis to b e shared \n \
+# between the Hi-C matrix and the TADs. \n \
+overlay_previous = share-y \n \
+\n \
+[bedgraph] \n \
+file = {input.score} \n \
+color = blue \n \
+height = 3 \n \
+title = TAD score \n \
+max_value = 10 \n \
+\n \
+[spacer] \n \
+height = 1' > {output}"
+        
+rule plotTADs:
+    input:
+        expand("TADs/tracks/{{sample}}_{{resolution}}.ini")
+    output:
+        "TADs/plots/TADs_{sample}_{resolution}_{region}.png"
+    shell:
+        "hicPlotTADs --tracks {input} -o {output} --region 1:{wildcards.region}"
+

@@ -1,5 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 90 of /work2/genphyse/dynagen/jmartin/polledHiC/workflows/hicexplorer_jm/Snakefile:
-Missing input files for rule conversion:
-/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw/trio1.offspring/trio1.offspring.run1.Dovetail_GCCAAT-CDFVM_L001_200000.matrix
-/work2/genphyse/dynagen/jmartin/polledHiC/workflows/nfcorehic_jm/Dovetail/hic_results/matrix/raw/trio1.offspring/trio1.offspring.run1.Dovetail_GCCAAT-CDFVM_L001_200000_abs.bed
