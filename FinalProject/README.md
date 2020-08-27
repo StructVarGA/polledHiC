@@ -570,7 +570,7 @@ sbatch nfcore-hic/Arima/Arima.sh
 
 ## hicexplorer
 
-Pour pouvoir executer le pipeline, il est essentiel d'avoir activer l'environnement [**polledHiC_env**](#conda--polledhicenv).
+Pour pouvoir executer le pipeline, il est essentiel d'avoir activer l'environnement [**polledHiC_env**](#conda--polledhic_env).
 
 Le répertoire hicexplorer contient quatre fichiers :
 
