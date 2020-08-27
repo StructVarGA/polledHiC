@@ -24,3 +24,42 @@ normalisation factor is 0.0351047
 normalisation factor is 0.0222233
 normalisation factor is 0.0216532
 normalisation factor is 0.0366736
+normalisation factor is 0.0219148
+normalisation factor is 0.015349
+normalisation factor is 0.0228304
+normalisation factor is 0.0149833
+normalisation factor is 0.0153318
+normalisation factor is 0.0160531
+normalisation factor is 0.00569652
+normalisation factor is 0.00748156
+normalisation factor is 0.00735651
+normalisation factor is 0.00763497
+normalisation factor is 0.00796718
+normalisation factor is 0.0841783
+normalisation factor is 0.0535653
+normalisation factor is 0.0381889
+normalisation factor is 0.0191223
+DONE
+
+Sum of all indivs. to get 'Consensus matrices'
+----
+Matrices to sum :
+hdf5/trio1.father/merged/10000/corrected.h5 hdf5/trio1.mother/merged/10000/corrected.h5 hdf5/trio1.offspring/merged/10000/corrected.h5 hdf5/trio2.father/merged/10000/corrected.h5 hdf5/trio2.mother/merged/10000/corrected.h5 hdf5/trio2.offspring/merged/10000/corrected.h5
+
+Consensus 10000 DONE !
+
+Matrices to sum :
+hdf5/trio1.father/merged/200000/corrected.h5 hdf5/trio1.mother/merged/200000/corrected.h5 hdf5/trio1.offspring/merged/200000/corrected.h5 hdf5/trio2.father/merged/200000/corrected.h5 hdf5/trio2.mother/merged/200000/corrected.h5 hdf5/trio2.offspring/merged/200000/corrected.h5
+
+Consensus 200000 DONE !
+
+Matrices to sum :
+hdf5/trio1.father/merged/25000/corrected.h5 hdf5/trio1.mother/merged/25000/corrected.h5 hdf5/trio1.offspring/merged/25000/corrected.h5 hdf5/trio2.father/merged/25000/corrected.h5 hdf5/trio2.mother/merged/25000/corrected.h5 hdf5/trio2.offspring/merged/25000/corrected.h5
+
+Consensus 25000 DONE !
+
+Matrices to sum :
+hdf5/trio1.father/merged/50000/corrected.h5 hdf5/trio1.mother/merged/50000/corrected.h5 hdf5/trio1.offspring/merged/50000/corrected.h5 hdf5/trio2.father/merged/50000/corrected.h5 hdf5/trio2.mother/merged/50000/corrected.h5 hdf5/trio2.offspring/merged/50000/corrected.h5
+
+Consensus 50000 DONE !
+
