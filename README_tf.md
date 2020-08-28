@@ -40,12 +40,13 @@ Table des matières
 Le projet PolledHiC est un projet réalisé dans le cadre d'un stage facultatif de Master 1 Bioinformatique et Biologie des systèmes.
 
 Il a été initié par Thomas FARAUT et Alain PINTON (INRAE Occitanie - UMR GenPhySE). 
+L'objectif du projet polledHiC est d'étudier l'impact d'une duplication (~100kb), associée au phénotype sans corne chez le bovin, sur l'organisation tridimensionnelle des chromosomes dans le noyau. On cherche plus précisément à savoir si c'est via une modification de l'organisation 3D que la mutation (duplication) produit le péhnotype sans corne.
 
 Le projet consiste à traiter les données de séquençage HiC de l'équipe de SeqOccin pour tenter d'obtenir des cartes chromosomiques de différentes régions d’intérêts chez les bovins. Le but est de fournir un pipeline permettant l'analyse et la comparaison des structures tri-dimensionnelle entre les phénotypes 'avec cornes' et 'sans cornes' chez certains d'entre eux.
 
 ## La méthode HiC
 
-La méthode de séquençage HiC ( High Chromosome Contact map ), est une technique de séquençage haut débits permettant d'étudier les interactions au niveau génétique.
+La méthode de séquençage HiC ( High Chromosome Contact map ), est une technique de séquençage haut débits permettant d'étudier les interactions entre régions chromosomiques.
 
 Les étapes sont les suivantes :
 
@@ -64,8 +65,8 @@ Les données ont été obtenus par le biais du projet « **Séquençage Occitani
 
 Elles contiennent les informations de deux trio de bovins pour lesquels ont été réalisés :
 
-- différents protocoles HiC (Arima, Dovetail, PhaseG et Maison).
-- différents runs avec différent niveaux de coverage.
+- différents protocoles HiC (Arima, Dovetail, PhaseG et un protocole maison).
+- différents runs avec différentes couvertures.
 
 Dans le cadre de ce projet, les protocoles PhaseG n'ont pas été retenus.
 
@@ -73,7 +74,7 @@ Dans le cadre de ce projet, les protocoles PhaseG n'ont pas été retenus.
 
 Le pipeline **[NF-Core/HiC](https://github.com/nf-core/hic)** est basé sur le workflow HiC-Pro. Il permet d'obtenir des matrices de contacts à partir de données brutes au format FastQ.
 
-A l'issue de ces étapes, les manipulations sur les matrices de contacts seront réalisés via le logiciel [HiCExplorer](https://github.com/deeptools/HiCExplorer).
+A l'issue de ces étapes, les manipulations sur les matrices de contacts seront réalisées via le logiciel [HiCExplorer](https://github.com/deeptools/HiCExplorer).
 
 ## Workflow
 
@@ -82,21 +83,21 @@ Le workflow de NF-Core/hic se réalise en X étapes :
 1. Alignements des reads
 2. Appariements des reads
 3. **Mapping**
-4. Obtention de la matrice de contacts brut
+4. Obtention de la matrice de contacts bruts
 
 ![](images/hicpro_wkflow.jpg)
 
-Au cours de ce pipeline, l'étape de mapping va déterminer les "**valid-pairs**". C'est à partir de ces valid-pairs que la matrice de contact pourra être créer, l'étape de mapping est donc très importantes.
+Au cours de ce pipeline, l'étape de mapping va déterminer les "**valid-pairs**". Une paire de lecture est dite valide si leurs alignements respectifs impliquent deux fragments de restriction différents. C'est à partir de ces valid-pairs que la matrice de contact pourra être créer, l'étape de mapping est donc très importantes.
 
 ![](images/hicpro_mapping_wkflow.jpg)
 
-Tout ce qui n'est pas considéré comme une valid-pairs n'est pas retenu dans l'élaboration de la carte de contact. Ils peuvent être obtenue en première intention à l'issue des premières étapes d'alignements, où en seconde intention, après une étape de "trim" des fragments de restrictions / ligations.
+Tout ce qui n'est pas considéré comme une valid-pairs n'est pas retenu dans l'élaboration de la carte de contact. Ils peuvent être obtenue en première intention à l'issue des premières étapes d'alignements, où en seconde intention, après une étape de "trimming" des lectures qui traversent le site de ligation.
 
 ## MultiQC
 
 À l'issue de son processus, NF-Core/hic permet également d'obtenir un rapport [MultiQC](https://multiqc.info/).
 
-MultiQC est un outil permettant de présenter sous forme de rapport html les résultats de nombreux outils bio-informatiques. Ici ces rapports contiennent les résultats statistiques des étape de mapping et de construction de la carte de contact.
+MultiQC est un outil pour le contrôle qualité permettant de présenter sous forme de rapport html de nombreuses statistiques. Ici ces rapports contiennent les résultats statistiques des étape de mapping et de construction de la carte de contact.
 
 ![](images/multiqc.jpg)
 
@@ -174,7 +175,9 @@ B   C   24
 (...)
 ```
 
-Ce format permet d'optimiser l'espace mémoire en ne tenant pas compte des interactions nulle (aucune valeur à 0). Il est également compatible avec d'autre logiciel d'analyse tel que HiTC Bioconductor package ou HiCPlotter software.
+Ce format permet d'optimiser l'espace mémoire en ne tenant pas compte des interactions nulle (aucune valeur à 0). Il est également compatible avec d'autres logiciels d'analyse tel que HiTC Bioconductor package ou HiCPlotter software.
+
+Ce format de fichier ne permet pas d'extraire rapidement les interactions d'une région donnée. Pour permettre ce type d'interrogation des structures ad hoc de stockage on été développées comme cool ou h5 tout deux basés sur le structure de stockage hdf5. Le logiciel HiCexplorer utilise le format h5 que nous utiliserons.
 
 Cependant, ce format n'est pas directement pris en charge par hicExplorer, mais il est possible de le convertir au format hdf5 reconnu par l'outil.
 
@@ -184,6 +187,7 @@ A ce stade, il y a une matrice de contact par run et par résolutions étudiées
 
 Pour réaliser le reste des analyses, il est nécessaire d'utiliser la dernière version d'hicExplorer.
 
+Nous utiliserons le système conda à la fois gestionnaire de packages et gestionnaire d'environements virtuels (https://docs.conda.io/).
 Pour s'assurer de la répétabilitée de la manipulation, il est conseillé de travailler sous un environnement conda identique à celui de l'étude :
 
 ```bash
@@ -207,7 +211,7 @@ Dans les deux cas, il est indispensable d'activer l'environnement de travail pou
 
 hicExplorer est une suite d'outils  permettant l'analyse de données HiC.
 
-Le pipeline d'analyse réalisé utilise de nombreux outils et permet d'obtenir, à l'issue de ce dernier, une carte chromosomique à différente échelle centrée sur les 3 premiers millions de bases du chromosome 1.
+Le pipeline d'analyse réalisé utilise de nombreux outils et permet d'obtenir, à l'issue de ce dernier, une carte chromosomique à différente échelle centrée sur les 3 premiers millions de bases du chromosome 1. Cette fenêtre a été choisi car elle porte sur la région des mutations Celtic, Friesian, Mongolian et Guarani, associées au phénotype sans-corne, situés entre les positions 2,4M et 2,7M.
 
 ## ConvertFormat
 
@@ -247,13 +251,14 @@ hicAdjustMatrix --matrix {input.indiv.merged.h5} --outFileName {output.indiv.adj
 
 Les développeurs d'hicExplorer recommandent de réaliser une normalisation avant la correction de la matrice _(cf. la documentation de [hicNormalize sur **readthedocs.io**](https://hicexplorer.readthedocs.io/en/latest/content/tools/hicNormalize.html#hicnormalize))_.
 
-La normalisation des matrices de données permet de normaliser au plus petit nombre de lecture donné de toutes les matrices ou à une plage de 0 à 1.
+La fonction hicNormalize permet de rendre les échantillons comparables entre eux, elle corrige en quelque sorte pour la profondeur de lecture de chaque échantillon.
 
 ```bash
 hicNormalize --matrices {input.indiv.adjusted.h5} --outFileName {output.indiv.normalized.h5} --normalize smallest
 ```
 
 La correction quant à elle permet d'éliminer les biais induit par les régions riches en GC, et normaliser le nombre de sites de restriction par bins. Étant donné qu'une fraction des bins peuvent être issue de régions fortement répétées, ces bins contiennent peu de contact et il est nécessaire de les filtrer.
+La correction, que l'on appelle normalization dans la littérature HiC, permet de rendre les réginos comparables entre elles.
 
 ```bash
 hicCorrectMatrix correct --matrix {input.indiv.normalized.h5} --outFileName {output.indiv.corrected.h5}
@@ -263,7 +268,7 @@ A l'issue de cette étape, il a été obtenu pour chaque individus, quatre matri
 
 ## Diagnostic plot
 
-Le diagnostic plot est un histogramme de la fréquence de comptage par bins. Cet histogramme permet de comparer les différentes résolutions sur un même jeu de données. Il est attendu d'observer une répartition Normale.
+Le diagnostic plot est un histogramme de la fréquence de comptage par bins, c'est la somme de toutes les valid pairs qui impliquent un bin. Cet histogramme permet de comparer les différentes résolutions sur un même jeu de données. Il est attendu d'observer une répartition Normale.
 
 Le modified Z-Score est un indicateur permettant d'identifier les outliers de nos données. Le trait bleu sur ces histogrammes marque le MAD Z-Score : Median Absolute Deviation. C'est la valeur par défaut prise lors de la correction pour éliminer ces outliers.
 
@@ -288,9 +293,9 @@ On observe un gros pics à 0. Les étapes d'ajustement et de correction permette
 
 Enfin, il devient alors possible de créer les cartes de contacts des régions qui nous intéressent à partir des résultats précédents. 
 
-Dans le but d'établir un profil, il a été créé un individus **"Consensus"** issue de la somme des matrices finales de chaque individus. 
+Dans le but d'établir un profil, il a été créé un individu **"Consensus"** issu de la somme des matrices finales de chaque individu. 
 
-La résolutions d'études va également dépendre de la fenêtre qui va nous intéresser. Plus cette fenêtre est grande, moins on doit être résolutif :
+La résolution d'étude va également dépendre de la fenêtre qui va nous intéresser. Plus cette fenêtre est grande, moins on doit être résolutif :
 
 ![](images/cons_10_vs_200k.png)
 
@@ -306,9 +311,9 @@ Cette fenêtre a été choisi pour prendre en compte les mutations Celtic, Fries
 
 ![](images/plots_25k.png)
 
-Au vu des données possédés, il semblerait que la résolution 25k bins soit la plus adéquate pour analyser nos données. On notera toute fois que la mise en place de l'individu "*Consensus*" a permis d'obtenir des résultats plus probant à la résolution 10k bins que les individus.
+Au vu des données, il semblerait que la résolution 25k bins soit la plus adéquate pour analyser nos données. On notera toute fois que la mise en place de l'individu "*Consensus*" a permis d'obtenir des résultats plus probant à la résolution 10k bins que les individus.
 
-On observe alors la formation de **TADs** _(**T**opologically **A**ssociated **D**omains)_ sur ces cartes. Ces TADs sont représentés par des *"carrés"* sur la diagonale de la carte, notamment entre les positions 1.20 et 1.65 , 1.70 et 1.95 , 2.00 et 2.40 et enfin entre 2.40 et 2.75.
+On observe alors la formation de **TADs** _(**T**opologically **A**ssociated **D**omains)_ sur ces cartes. Ces TADs correspondent à des régions de fortes interactions internes et peu d'interactions externes. Ces domaines seraient liés au méchanisme de régulation des gènes, permettant de limiter un mécanisme de régulation à cette région et par la même d'isoler cette régions d'éventuelles régulations externes. Ces TADs sont représentés par des *"carrés"* sur la diagonale de la carte, notamment entre les positions 1.20 et 1.65 , 1.70 et 1.95 , 2.00 et 2.40 et enfin entre 2.40 et 2.75.
 
 Il semblerait également que la matrices consensus permette de retrouver ces patterns à la résolution 10k bins contrairement aux matrices issue des individus.
 
@@ -336,7 +341,7 @@ En sortie de cette fonction, il y a plusieurs fichiers produits :
 
 ### hicPlotTADs :
 
-En plus des sortie de `hicFindTADs`, il est nécessaire de mettre en place un fichier `tracks.ini` pour plotter correctement les TADs.
+En plus des sorties de `hicFindTADs`, il est nécessaire de mettre en place un fichier `tracks.ini` pour plotter correctement les TADs.
 
 Ces fichiers sont composé comme ci-dessous :
 
