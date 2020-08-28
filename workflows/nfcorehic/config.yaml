@@ -19,7 +19,7 @@ hicpro:
   Dovetail:
     restriction_site: '^GATC'
     ligation_site: 'GATCGATC'
-  bin_size: '1000000,500000,200000,50000'
+  bin_size: '200000,50000,25000,10000'
 
 sample: nfcoreout
 

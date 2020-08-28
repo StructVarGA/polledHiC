@@ -1,0 +1,4 @@
+sample	protocol	fastqdir
+trio1.offspring	Maison	/work2/genphyse/dynagen/tfaraut/polledHiC/data/reads/snaketest/trio1.offspring/Maison
+trio1.offspring	Arima	/work2/genphyse/dynagen/tfaraut/polledHiC/data/reads/snaketest/trio1.offspring/Arima
+trio1.father	Dovetail	/work2/genphyse/dynagen/tfaraut/polledHiC/data/reads/snaketest/trio1.father/Dovetail

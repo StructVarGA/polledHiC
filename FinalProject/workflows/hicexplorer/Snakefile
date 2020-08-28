@@ -1,3 +1,16 @@
+##################################################################
+###                                                            ###
+### This snakemake allows to compute a full pipeline analyze   ###
+### with hicexplorer. At the end, it will return HiC maps      ###
+### and TADs plot for each resolutions, protocols and samples  ###
+### given in config.yaml.                                      ###
+###                                                            ###
+### This snakemake is called to submit on cluster in           ###
+### hicexplorer.sh but you can run it with the following cmd : ###
+###                                                            ###
+### snakemake -j 1 -p                                          ###
+###                                                            ###
+##################################################################
 
 import os
 import glob
