@@ -177,7 +177,7 @@ B   C   24
 
 Ce format permet d'optimiser l'espace mémoire en ne tenant pas compte des interactions nulle (aucune valeur à 0). Il est également compatible avec d'autres logiciels d'analyse tel que HiTC Bioconductor package ou HiCPlotter software.
 
-Ce format de fichier ne permet pas d'extraire rapidement les interactions d'une région donnée. Pour permettre ce type d'interrogation des structures ad hoc de stockage on été développées comme cool ou h5 tout deux basés sur le structure de stockage hdf5. Le logiciel HiCexplorer utilise le format h5 que nous utiliserons.
+Ce format de fichier ne permet pas d'extraire rapidement les interactions d'une région donnée. Pour permettre ce type d'interrogation des structures ad hoc de stockage on été développées comme cool ou h5 toutes deux basées sur le structure de stockage hdf5. Le logiciel HiCexplorer utilise le format h5 que nous utiliserons.
 
 Cependant, ce format n'est pas directement pris en charge par hicExplorer, mais il est possible de le convertir au format hdf5 reconnu par l'outil.
 
