@@ -40,12 +40,15 @@ Table des matières
 Le projet PolledHiC est un projet réalisé dans le cadre d'un stage facultatif de Master 1 Bioinformatique et Biologie des systèmes.
 
 Il a été initié par Thomas FARAUT et Alain PINTON (INRAE Occitanie - UMR GenPhySE). 
+L'objectif du projet polledHiC est d'étudier l'impact d'une duplication (~100kb), associée au phénotype sans corne chez le bovin, sur l'organisation tridimensionnelle des chromosomes dans le noyau. On cherche plus précisément à savoir si c'est via une modification de l'organisation 3D que la mutation (duplication) produit le péhnotype sans corne.
 
-Le projet consiste à traiter les données de séquençage HiC de l'équipe de SeqOccin pour tenter d'obtenir des cartes chromosomiques de différentes régions d’intérêts chez les bovins. Le but est de fournir un pipeline permettant l'analyse et la comparaison des structures tri-dimensionnelle entre les phénotypes 'avec cornes' et 'sans cornes' chez certains d'entre eux.
+Le projet consiste à traiter les données de séquençage HiC de l'équipe de SeqOccin pour tenter d'obtenir des cartes chromosomiques de différentes régions d’intérêts chez les bovins. 
+Le but __du stage__ est de fournir un pipeline permettant l'analyse et la comparaison des structures tri-dimensionnelle entre les phénotypes 'avec cornes' et 'sans cornes' chez certains d'entre eux.
 
 ## La méthode HiC
 
-La méthode de séquençage HiC ( High Chromosome Contact map ), est une technique de séquençage haut débits permettant d'étudier les interactions au niveau génétique.
+La méthode de séquençage HiC ( High Chromosome Contact map ), est une technique de séquençage haut débits permettant d'étudier les interactions entre régions chromosomiques.
+
 
 Les étapes sont les suivantes :
 
@@ -64,8 +67,8 @@ Les données ont été obtenus par le biais du projet « **Séquençage Occitani
 
 Elles contiennent les informations de deux trio de bovins pour lesquels ont été réalisés :
 
-- différents protocoles HiC (Arima, Dovetail, PhaseG et Maison).
-- différents runs avec différent niveaux de coverage.
+- différents protocoles HiC (Arima, Dovetail, PhaseG et et un protocole maison).
+- différents runs avec différente couverture.
 
 Dans le cadre de ce projet, les protocoles PhaseG n'ont pas été retenus.
 
