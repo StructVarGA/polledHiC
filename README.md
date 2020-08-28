@@ -9,3 +9,4 @@ The pipeline is descibed in :
 We propose to use the following nextflow implementation of the pipeline: 
    https://github.com/nf-core/hic/blob/master/docs/usage.md
 
+# polledhic-dev
