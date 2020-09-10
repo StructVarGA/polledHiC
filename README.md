@@ -33,7 +33,7 @@ Table des matières
       * [make_sampled_protocol.py :](#make_sampled_protocolpy-)
       * [Snakefile :](#snakefile-)
       * [hicexplorer.sh :](#hicexplorersh-)
-* [Résultat final](#)
+* [Résultat final](#résultat-final--trio1-offspring)
 * [TL;DR : Comment lancer une analyse sur Genologin](#tldr--comment-lancer-une-analyse-sur-genologin)
 
 # Introduction
@@ -691,7 +691,7 @@ Attention, si ces lignes sont dé-commenter lors du dry-run, le job sera en erre
 
 L'ensemble de ces analyses ont permis d'obtenir l'image suivante :
 
-![](images/trio1_offspring_polled_diplis_ltr.png)
+![](images/trio1_offspring_polled_duplis_ltr.png)
 
 On observe alors que les duplications d'intérêts se trouvent allignées avec les frontières de TADs mises en évidences.
 
